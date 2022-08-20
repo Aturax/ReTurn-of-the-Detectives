@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Iconos-dado_0
+      name: Pajarita
       rect:
         serializedVersion: 2
         x: 0
@@ -125,7 +125,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iconos-dado_1
+      name: Monoculo
       rect:
         serializedVersion: 2
         x: 16
@@ -146,7 +146,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iconos-dado_2
+      name: Lupa
       rect:
         serializedVersion: 2
         x: 32
@@ -167,7 +167,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iconos-dado_3
+      name: Periodico
       rect:
         serializedVersion: 2
         x: 48
@@ -188,7 +188,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iconos-dado_4
+      name: Asno
       rect:
         serializedVersion: 2
         x: 64
@@ -209,13 +209,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iconos-dado_5
+      name: Newspaper
       rect:
         serializedVersion: 2
-        x: 80
+        x: 81
         y: 0
-        width: 16
-        height: 16
+        width: 15
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,7 +230,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iconos-dado_6
+      name: Trebol
       rect:
         serializedVersion: 2
         x: 96
@@ -261,13 +261,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Iconos-dado_0: -2121869610
-      Iconos-dado_6: 52504487
-      Iconos-dado_1: -1403209318
-      Iconos-dado_2: 343614435
-      Iconos-dado_4: -799919753
-      Iconos-dado_3: 1834069306
-      Iconos-dado_5: 859931341
+      Periodico: 1834069306
+      Asno: -799919753
+      Newspaper: 859931341
+      Lupa: 343614435
+      Monoculo: -1403209318
+      Trebol: 52504487
+      Pajarita: -2121869610
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
