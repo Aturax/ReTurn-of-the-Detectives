@@ -7,6 +7,9 @@ using System;
 
 public class CityState : State
 {
+    private AudioSource audiosource = null;
+    private AudioClip cityClip = null;
+
     private GameObject cityPanel = null;
     private TMP_Text calendar = null;
     private GameObject askForTravel = null;
@@ -24,10 +27,12 @@ public class CityState : State
     private TMP_Text gameOverText = null;
     private Button continueButton = null;    
 
-    public CityState(StateMachine stateMachine, GameObject cityPanel, TMP_Text calendar, GameObject askForTravel, Button[] locationsPanelButtons,
+    public CityState(StateMachine stateMachine, AudioSource audiosource, AudioClip cityClip, GameObject cityPanel, TMP_Text calendar, GameObject askForTravel, Button[] locationsPanelButtons,
         Button[] locationsNumberButtons, List<LocationScriptable> locations, TMP_Text destination, Button travel, GameObject[] frames,
         GameObject[] completed, GameObject gameOverWindow, TMP_Text gameOverLabel, TMP_Text gameOverText, Button continueButton) : base( stateMachine)
     {
+        this.audiosource = audiosource;
+        this.cityClip = cityClip;
         this.cityPanel = cityPanel;
         this.calendar = calendar;
         this.askForTravel = askForTravel;
@@ -61,6 +66,8 @@ public class CityState : State
 
     public override void Enter()
     {
+        audiosource.clip = cityClip;
+        audiosource.Play();
         cityPanel.gameObject.SetActive(true);
         CheckTurn();
         CheckCompletedTasks();
@@ -96,7 +103,10 @@ public class CityState : State
 
     private void CheckGameOver()
     {
-        calendar.text = GameData.Instance.DayGone().ToString();
+        if (GameData.Instance.playerTurn == 0)
+        {
+            calendar.text = GameData.Instance.DayGone().ToString();
+        }
         
         if (GameData.Instance.DaysLeft < 0)
         {

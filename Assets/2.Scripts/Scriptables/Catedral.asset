@@ -22,3 +22,4 @@ MonoBehaviour:
   - task: 0300000003000000
   - task: 010000000100000003000000
   sprite: {fileID: 21300000, guid: 4b8ebe0e06a05ce46aa84309c05f4262, type: 3}
+  clip: {fileID: 8300000, guid: b54181a0a29f35e43b7c984d7c9028df, type: 3}

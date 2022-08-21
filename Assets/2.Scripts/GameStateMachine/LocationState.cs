@@ -5,6 +5,7 @@ using TMPro;
 
 public class LocationState : State
 {
+    private AudioSource audiosource = null;
     private GameObject locationPanel = null;
     private LocationScriptable location = null;
     private Image locationImage = null;
@@ -23,11 +24,12 @@ public class LocationState : State
     private TMP_Text locationEndedText = null;
     private Button continueButton = null;
 
-    public LocationState(StateMachine stateMachine, GameObject locationPanel, Image locationImage, TMP_Text locationLabel,
+    public LocationState(StateMachine stateMachine, AudioSource audiosource, GameObject locationPanel, Image locationImage, TMP_Text locationLabel,
         TasksImages[] tasksImages, List<Sprite> dice, List<Image> diceRoll, Image investigatorImage, Button investigateButton,
         GameObject[] completedTasks, GameObject[] tasksIndicators, GameObject locationEndedWindow, TMP_Text locationEndedHeader,
         TMP_Text locationEndedText, Button continueButton) : base( stateMachine)
     {
+        this.audiosource = audiosource;
         this.locationPanel = locationPanel;
         this.locationImage = locationImage;
         this.locationLabel = locationLabel;
@@ -52,6 +54,8 @@ public class LocationState : State
 
     public override void Enter()
     {
+        audiosource.clip = location.clip;
+        audiosource.Play();
         locationPanel.gameObject.SetActive(true);
         investigatorImage.sprite = location.investigatorPortrait[GameData.Instance.playerTurn];
         selectedTask = 0;

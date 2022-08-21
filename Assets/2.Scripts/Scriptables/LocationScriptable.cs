@@ -15,4 +15,5 @@ public class LocationScriptable : ScriptableObject
     public int number;
     public DiceTask[] diceTasks;
     public Sprite sprite;
+    public AudioClip clip;
 }

@@ -16,8 +16,10 @@ MonoBehaviour:
   - {fileID: -267029307, guid: 5d07e7c6cda3abc4fa2e62b37c5fac90, type: 3}
   - {fileID: -899293795, guid: 5d07e7c6cda3abc4fa2e62b37c5fac90, type: 3}
   name: Callejon
+  number: 0
   diceTasks:
   - task: 0300000002000000
   - task: 010000000100000001000000
   - task: 0100000004000000
   sprite: {fileID: 21300000, guid: 79e23536e9aaf4140982c184560902e1, type: 3}
+  clip: {fileID: 8300000, guid: 3766dd4a5e3b7bf409e15ba28b4b3a2d, type: 3}

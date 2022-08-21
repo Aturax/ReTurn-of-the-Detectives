@@ -15,10 +15,9 @@ public class GameLoader : MonoBehaviour
 
     [Header("Main Menu")]
     public GameObject mainMenu = null;
-    public AudioClip mainTheme = null;
 
     [Header("City Window")]
-    public AudioClip cityTheme = null;
+    public AudioClip cityClip = null;
     public GameObject cityPanel = null;
     public TMP_Text calendar = null;
     public GameObject askForTravel = null;
@@ -33,7 +32,6 @@ public class GameLoader : MonoBehaviour
     public Button continueButton = null;
 
     [Header("Locations")]
-    public AudioClip locationTheme = null;
     public GameObject locationPanel = null;
     public Image locationImage = null;
     public TMP_Text locationLabel = null;
@@ -69,11 +67,11 @@ public class GameLoader : MonoBehaviour
 
         stateMachine.mainMenuState = new MainMenuState(stateMachine, mainMenu);
         
-        stateMachine.cityState = new CityState(stateMachine, cityPanel, calendar, askForTravel, locationsPanelButtons,
+        stateMachine.cityState = new CityState(stateMachine, audiosource, cityClip, cityPanel, calendar, askForTravel, locationsPanelButtons,
             locationsNumberButtons, locations, destination, travel, frames, completed, gameOverWindow, gameOverLabel,
             gameOverText, continueButton);
 
-        stateMachine.locationState = new LocationState(stateMachine, locationPanel, locationImage, locationLabel,
+        stateMachine.locationState = new LocationState(stateMachine, audiosource, locationPanel, locationImage, locationLabel,
             tasksImages, diceImages, diceRoll, investigatorImage, investigateButton, completedTasks, tasksIndicators,
             locationEndedWindow, locationEndedHeader, locationEndedText, returnToCityButton);
 
