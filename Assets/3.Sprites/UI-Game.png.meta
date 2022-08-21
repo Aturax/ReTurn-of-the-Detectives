@@ -229,7 +229,7 @@ TextureImporter:
         width: 124
         height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -237,6 +237,27 @@ TextureImporter:
       bones: []
       spriteID: af5213960b17ed0409b54fad0c120536
       internalID: 1022589122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 16
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6197f1ad5a1581a4b9fe89a942731bba
+      internalID: 1115593776
       vertices: []
       indices: 
       edges: []
@@ -254,6 +275,7 @@ TextureImporter:
     nameFileIdTable:
       Male: -267029307
       Female: -899293795
+      Arrow: 1115593776
       Map: 849308105
       Panel: -1684513416
       Calendar: 1756379570

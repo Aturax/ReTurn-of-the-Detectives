@@ -16,9 +16,11 @@ public class CityState : State
     private TMP_Text destination = null;
     private int locationIndex = 0;
     private GameObject[] frames = null;
+    private GameObject[] completed = null;
 
     public CityState(StateMachine stateMachine, GameObject cityPanel, TMP_Text calendar, GameObject askForTravel, Button[] locationsPanelButtons,
-        Button[] locationsNumberButtons, List<LocationScriptable> locations, TMP_Text destination, Button travel, GameObject[] frames) : base( stateMachine)
+        Button[] locationsNumberButtons, List<LocationScriptable> locations, TMP_Text destination, Button travel, GameObject[] frames,
+        GameObject[] completed) : base( stateMachine)
     {
         this.cityPanel = cityPanel;
         this.calendar = calendar;
@@ -29,6 +31,7 @@ public class CityState : State
         this.destination = destination;
         this.travel = travel;
         this.frames = frames;
+        this.completed = completed;
         
 
         for (int i = 0; i < locationsPanelButtons.Length; i++)
@@ -50,6 +53,7 @@ public class CityState : State
     {
         cityPanel.gameObject.SetActive(true);
         CheckTurn();
+        CheckCompletedTasks();
         CheckGameOver();
     }
     public override void HandleInput() { }
@@ -57,6 +61,7 @@ public class CityState : State
     public override void FixedUpdate() { }
     public override void Exit()
     {
+        askForTravel.SetActive(false);
         cityPanel.gameObject.SetActive(false);
     }
 
@@ -65,6 +70,17 @@ public class CityState : State
         GameData.Instance.ChangeTurn();
         frames[0].SetActive(GameData.Instance.playerTurn == 0);
         frames[1].SetActive(GameData.Instance.playerTurn == 1);
+    }
+
+    private void CheckCompletedTasks()
+    {
+        for (int i = 0; i < completed.Length; i++)
+        {
+            bool status = GameData.Instance.IsLocationCompleted(i);
+            completed[i].SetActive(status);
+            locationsPanelButtons[i].enabled = !status;
+            locationsNumberButtons[i].enabled = !status;
+        }
     }
 
     private void CheckGameOver()

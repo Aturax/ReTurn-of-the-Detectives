@@ -10,8 +10,8 @@ public class GameData
     public int playerTurn { get; private set; } = 1;
     public int dicesAvailable { get; private set; } = 6;
     public int donkeyDices = 0;
-    public bool[] testPassed { get; private set; } = {false, false, false};
-    public bool[] locationsPassed { get; private set; } = { false, false, false };
+    public bool[] TaskPassed { get; private set; } = {false, false, false};
+    public bool[] locationsPassed { get; private set; } = { false, true, false };
 
     private GameData() { }
 
@@ -32,8 +32,8 @@ public class GameData
         DaysLeft = 10;
         playerTurn = 1;
         ResetDices();
-        ResetTestPassed();
-        ResetLocationsPased();
+        ResetTaskPassed();
+        ResetLocationsPassed();
     }
 
     public int DayGone()
@@ -52,25 +52,20 @@ public class GameData
         dicesAvailable += 6 - donkeyDices;         
     }
 
-    public void ResetTestPassed()
+    public void ResetTaskPassed()
     {
-        for (int i = 0; i < testPassed.Length; i++)
+        for (int i = 0; i < TaskPassed.Length; i++)
         {
-            testPassed[i] = false;
+            TaskPassed[i] = false;
         }
     }
 
-    public int GetTestPassed()
+    public void SetTaskPassed(int index)
     {
-        int passed = 0;
-        for (int i = 0; i < testPassed.Length; i++)
-        {
-            if (testPassed[i]) passed++;
-        }
-        return passed;
+        TaskPassed[index] = true;
     }
 
-    public void ResetLocationsPased()
+    public void ResetLocationsPassed()
     {
         for (int i = 0; i < locationsPassed.Length; i++)
         {
@@ -78,14 +73,14 @@ public class GameData
         }
     }
 
-    public int GetLocationsPassed()
+    public void SetLocationPassed(int index)
     {
-        int passed = 0;
-        for (int i = 0; i < locationsPassed.Length; i++)
-        {
-            if (locationsPassed[i]) passed++;
-        }
-        return passed;
+        locationsPassed[index] = true;
+    }
+
+    public bool IsLocationCompleted(int index)
+    {
+        return locationsPassed[index];
     }
 
     public void ChangeTurn()

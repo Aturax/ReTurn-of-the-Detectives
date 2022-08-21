@@ -9,31 +9,32 @@ public class LocationState : State
     private LocationScriptable location = null;
     private Image locationImage = null;
     private TMP_Text locationLabel = null;
-    private List<Image> firstTestImages = null;
-    private List<Image> secondTestImages = null;
-    private List<Image> thirdTestImages = null;
+    private TasksImages[] tasksImages = null;
     private List<Sprite> diceImages = null;
     private List<Image> diceRoll = null;
     private Image investigatorImage = null;
     private Button investigateButton = null;
+    private GameObject[] completedTasks = null;
+    private GameObject[] tasksIndicators = null;
+    private int selectedTask = 0;
 
     public LocationState(StateMachine stateMachine, GameObject locationPanel, Image locationImage, TMP_Text locationLabel,
-        List<Image> first, List<Image> second, List<Image> third, List<Sprite> dice, List<Image> diceRoll,
-        Image investigatorImage, Button investigateButton) : base( stateMachine)
+        TasksImages[] tasksImages, List<Sprite> dice, List<Image> diceRoll, Image investigatorImage, Button investigateButton,
+        GameObject[] completedTasks, GameObject[] tasksIndicators) : base( stateMachine)
     {
         this.locationPanel = locationPanel;
         this.locationImage = locationImage;
         this.locationLabel = locationLabel;
-        
-        firstTestImages = first;
-        secondTestImages = second;
-        thirdTestImages = third;
+
+        this.tasksImages = tasksImages;
 
         diceImages = dice;
 
         this.diceRoll = diceRoll;
         this.investigatorImage = investigatorImage;
         this.investigateButton = investigateButton;
+        this.completedTasks = completedTasks;
+        this.tasksIndicators = tasksIndicators;
 
         investigateButton.onClick.AddListener(() => { ShowDiceRoll(); });
     }
@@ -42,8 +43,11 @@ public class LocationState : State
     {
         locationPanel.gameObject.SetActive(true);
         investigatorImage.sprite = location.investigatorPortrait[GameData.Instance.playerTurn];
+        selectedTask = 0;
         ResetDices();
-        FillTests();
+        FillTasks();
+        ResetIndicators();
+        SelectTask();
     }
     public override void HandleInput() { }
     public override void Update() { }
@@ -64,21 +68,43 @@ public class LocationState : State
         }        
     }
 
-    private void FillTests()
+    private void ResetIndicators()
     {
-        ShowDiceTest(firstTestImages, location.firstDiceTest);
-        ShowDiceTest(secondTestImages, location.secondDiceTest);
-        ShowDiceTest(thirdTestImages, location.thirdDiceTest);
+        for (int i = 0; i < completedTasks.Length; i++)
+        {
+            completedTasks[i].SetActive(false);        
+        }
+
+        for (int i = 0; i < tasksIndicators.Length; i++)
+        {
+            tasksIndicators[i].SetActive(false);
+        }
     }
 
-    private void ShowDiceTest(List<Image> images, List<Dice> test)
+    private void FillTasks()
     {
-        for (int i = 0; i < images.Count; i++)
+        for (int i = 0; i < location.diceTasks.Length; i++)
         {
-            if (test.Count > i)
+            ShowDiceTask(tasksImages[i].taskImages, location.diceTasks[i].task);
+        }        
+    }
+
+    private void SelectTask()
+    {
+        for (int i = 0; i < tasksIndicators.Length; i++)
+        {
+            tasksIndicators[i].SetActive(i == selectedTask);
+        }        
+    }
+
+    private void ShowDiceTask(Image[] images, Dice[] task)
+    {
+        for (int i = 0; i < images.Length; i++)
+        {
+            if (task.Length > i)
             {
                 images[i].gameObject.SetActive(true);
-                images[i].sprite = diceImages[(int)test[i]];
+                images[i].sprite = diceImages[(int)task[i]];
             }
             else images[i].gameObject.SetActive(false);            
         }
@@ -93,7 +119,31 @@ public class LocationState : State
             diceRoll[i].sprite = diceImages[(int)roll[i]];
         }
 
-        Debug.Log(DiceRoll.CheckDiceTest(location.firstDiceTest, roll));
+        CheckDiceTask(location.diceTasks[selectedTask].task, roll);
+    }
+
+    private void CheckDiceTask(Dice[] task, List<Dice> roll)
+    {
+        bool status = DiceRoll.CheckDiceTask(task, roll);
+        completedTasks[selectedTask].SetActive(status);
+        
+        if (status)
+        {
+            completedTasks[selectedTask].SetActive(DiceRoll.CheckDiceTask(task, roll));
+            completedTasks[selectedTask].SetActive(true);
+            GameData.Instance.SetTaskPassed(selectedTask);
+            selectedTask++;            
+        }
+
+        if (selectedTask == 3)
+        {
+            GameData.Instance.SetLocationPassed(location.number);
+            stateMachine.ChangeState(((GameSM)stateMachine).cityState);
+        }
+        else
+        {
+            SelectTask();
+        }
     }
 
     public void GetLocation(LocationScriptable location)

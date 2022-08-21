@@ -3,6 +3,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[System.Serializable]
+public class TasksImages
+{
+    public Image[] taskImages;
+}
+
 public class GameLoader : MonoBehaviour
 {
     [Header("Main Menu")]
@@ -16,6 +22,7 @@ public class GameLoader : MonoBehaviour
     public Button[] locationsNumberButtons = null;
     public Button travel = null;
     public GameObject[] frames = null;
+    public GameObject[] completed = null;
     
     [Header("Locations")]
     public GameObject locationPanel = null;
@@ -27,10 +34,11 @@ public class GameLoader : MonoBehaviour
     public Image investigatorImage = null;
     public Button investigateButton = null;
 
-    [Header("Location Test")]
-    public List<Image> firstTestImages = null;
-    public List<Image> secondTestImages = null;
-    public List<Image> thirdTestImages = null;
+    [Header("Location Tasks")]
+    public TasksImages[] tasksImages = null;
+    public GameObject[] completedTasks = null;
+    public GameObject[] tasksIndicators = null;
+
 
     [Header("Dice Images")]
     public List<Sprite> diceImages = null;
@@ -45,10 +53,11 @@ public class GameLoader : MonoBehaviour
         stateMachine.mainMenuState = new MainMenuState(stateMachine, mainMenu);
         
         stateMachine.cityState = new CityState(stateMachine, cityPanel, calendar, askForTravel, locationsPanelButtons,
-            locationsNumberButtons, locations, destination, travel, frames);
+            locationsNumberButtons, locations, destination, travel, frames, completed);
 
         stateMachine.locationState = new LocationState(stateMachine, locationPanel, locationImage, locationLabel,
-            firstTestImages, secondTestImages, thirdTestImages, diceImages, diceRoll, investigatorImage, investigateButton);
+            tasksImages, diceImages, diceRoll, investigatorImage, investigateButton,
+            completedTasks, tasksIndicators);
                 
         stateMachine.StartStateMachine();
         started = true;

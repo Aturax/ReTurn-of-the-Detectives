@@ -16,7 +16,9 @@ MonoBehaviour:
   - {fileID: -267029307, guid: 5d07e7c6cda3abc4fa2e62b37c5fac90, type: 3}
   - {fileID: -899293795, guid: 5d07e7c6cda3abc4fa2e62b37c5fac90, type: 3}
   name: Taberna
-  firstDiceTest: 0100000003000000
-  secondDiceTest: 0100000002000000
-  thirdDiceTest: 040000000100000001000000
+  number: 2
+  diceTasks:
+  - task: 0100000003000000
+  - task: 0100000002000000
+  - task: 040000000100000001000000
   sprite: {fileID: 21300000, guid: ae715a6a13caf324ba43a8a399cd7e07, type: 3}

@@ -26,9 +26,9 @@ public static class DiceRoll
         return diceRoll;
     }
 
-    public static bool CheckDiceTest(List<Dice> test, List<Dice> diceRoll)
+    public static bool CheckDiceTask(Dice[] task, List<Dice> diceRoll)
     {
-        foreach (Dice dice in test)
+        foreach (Dice dice in task)
         {
             if (diceRoll.Contains(dice))
             {
