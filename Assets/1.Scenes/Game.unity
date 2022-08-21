@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 127754563}
   - component: {fileID: 127754562}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Dice 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1678,7 +1678,7 @@ GameObject:
   - component: {fileID: 296023550}
   - component: {fileID: 296023549}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: Dice 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1941,6 +1941,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9b3b043edb4361c4e859635ea4ba330e, type: 2}
   - {fileID: 11400000, guid: afae29a9d4521f14b97788616f51e0b6, type: 2}
   destination: {fileID: 86840831}
+  diceRoll:
+  - {fileID: 127754562}
+  - {fileID: 824197556}
+  - {fileID: 2132511631}
+  - {fileID: 1997631821}
+  - {fileID: 296023549}
+  - {fileID: 2029441134}
   firstTestImages:
   - {fileID: 674876739}
   - {fileID: 1396130186}
@@ -4180,7 +4187,7 @@ GameObject:
   - component: {fileID: 824197557}
   - component: {fileID: 824197556}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Dice 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9867,7 +9874,7 @@ GameObject:
   - component: {fileID: 1997631822}
   - component: {fileID: 1997631821}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: Dice 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10016,7 +10023,7 @@ GameObject:
   - component: {fileID: 2029441135}
   - component: {fileID: 2029441134}
   m_Layer: 5
-  m_Name: Image (5)
+  m_Name: Dice 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10744,7 +10751,7 @@ GameObject:
   - component: {fileID: 2132511632}
   - component: {fileID: 2132511631}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Dice 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

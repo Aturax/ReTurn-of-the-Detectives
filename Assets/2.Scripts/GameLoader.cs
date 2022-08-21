@@ -21,6 +21,7 @@ public class GameLoader : MonoBehaviour
     public TMP_Text locationLabel = null;
     public List<LocationScriptable> locations = null;
     public TMP_Text destination = null;
+    public List<Image> diceRoll = null;
 
     [Header("Location Test")]
     public List<Image> firstTestImages = null;
@@ -41,7 +42,7 @@ public class GameLoader : MonoBehaviour
         stateMachine.cityState = new CityState(this, stateMachine, cityPanel, askForTravel, locationsPanelButtons,
             locationsNumberButtons, locations, destination, travel);
         stateMachine.locationState = new LocationState(this, stateMachine, locationPanel, locationImage, locationLabel,
-            firstTestImages, secondTestImages, thirdTestImages, diceImages);
+            firstTestImages, secondTestImages, thirdTestImages, diceImages, diceRoll);
                 
         stateMachine.StartStateMachine();
         started = true;

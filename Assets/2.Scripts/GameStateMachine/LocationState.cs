@@ -13,9 +13,10 @@ public class LocationState : State
     private List<Image> secondTestImages = null;
     private List<Image> thirdTestImages = null;
     private List<Sprite> diceImages = null;
+    private List<Image> diceRoll = null;
 
     public LocationState(GameLoader gameManager, StateMachine stateMachine, GameObject locationPanel, Image locationImage, TMP_Text locationLabel,
-        List<Image> first, List<Image> second, List<Image> third, List<Sprite> dice) : base(gameManager, stateMachine)
+        List<Image> first, List<Image> second, List<Image> third, List<Sprite> dice, List<Image> diceRoll) : base(gameManager, stateMachine)
     {
         this.locationPanel = locationPanel;
         this.locationImage = locationImage;
@@ -26,11 +27,14 @@ public class LocationState : State
         thirdTestImages = third;
 
         diceImages = dice;
+
+        this.diceRoll = diceRoll;
     }
 
     public override void Enter()
     {
         locationPanel.gameObject.SetActive(true);
+        ResetDices();
         FillTests();
     }
     public override void HandleInput() { }
@@ -39,6 +43,18 @@ public class LocationState : State
     public override void Exit()
     {
         locationPanel.gameObject.SetActive(false);
+    }
+
+    private void ResetDices()
+    {
+        int index = 0;
+
+        foreach(Dice diceValue in System.Enum.GetValues(typeof(Dice)))
+        {
+            diceRoll[index].sprite = diceImages[(int)diceValue];
+            index++;
+        }
+        
     }
 
     private void FillTests()
