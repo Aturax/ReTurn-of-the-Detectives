@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum Dice
 {
     Donkey = 0,
@@ -13,22 +12,21 @@ public enum Dice
     Clover = 4
 }
 
-public class DiceRoll
+public static class DiceRoll
 {
-    public List<Dice> GetDiceRoll(int diceNumber)
+    public static List<Dice> GetDiceRoll(int diceNumber)
     {
-        List<Dice> diceRoll = new List<Dice>();
-        
+        List<Dice> diceRoll = new List<Dice>();        
 
         for (int i = 0; i < diceNumber; i++)
         {
-            diceRoll.Add((Dice)Random.Range(0, System.Enum.GetValues(typeof(Dice)).Length));
+            diceRoll.Add((Dice)Random.Range(0, System.Enum.GetValues(typeof(Dice)).Length - 1));            
         }
 
         return diceRoll;
     }
 
-    public bool CheckDiceTest(List<Dice> test, List<Dice> diceRoll)
+    public static bool CheckDiceTest(List<Dice> test, List<Dice> diceRoll)
     {
         foreach (Dice dice in test)
         {

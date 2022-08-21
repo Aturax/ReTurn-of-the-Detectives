@@ -1,11 +1,9 @@
 public class State
 {
-    public GameLoader gameManager;
     protected StateMachine stateMachine;
 
-    public State(GameLoader gameManager, StateMachine stateMachine)
+    public State(StateMachine stateMachine)
     {
-        this.gameManager = gameManager;
         this.stateMachine = stateMachine;
     }
 

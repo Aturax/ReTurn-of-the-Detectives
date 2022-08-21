@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MainMenuState : State
 {
-    private GameObject mainMenu = null;
+    private GameObject mainMenu = null;    
 
-    public MainMenuState(GameLoader gameManager, StateMachine stateMachine, GameObject mainMenu) : base(gameManager, stateMachine)
+    public MainMenuState(StateMachine stateMachine,  GameObject mainMenu) : base(stateMachine)
     {
         this.mainMenu = mainMenu;
     }
@@ -14,6 +14,7 @@ public class MainMenuState : State
     public override void Enter()
     {
         mainMenu.SetActive(true);
+        GameData.Instance.ResetData();
     }
 
     public override void HandleInput() 

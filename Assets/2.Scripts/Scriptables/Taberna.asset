@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ce2d2081b4a514484f6b5856f047ac, type: 3}
   m_Name: Taberna
   m_EditorClassIdentifier: 
+  investigatorPortrait:
+  - {fileID: -267029307, guid: 5d07e7c6cda3abc4fa2e62b37c5fac90, type: 3}
+  - {fileID: -899293795, guid: 5d07e7c6cda3abc4fa2e62b37c5fac90, type: 3}
   name: Taberna
   firstDiceTest: 0100000003000000
   secondDiceTest: 0100000002000000

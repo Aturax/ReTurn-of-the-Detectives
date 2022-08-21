@@ -14,9 +14,12 @@ public class LocationState : State
     private List<Image> thirdTestImages = null;
     private List<Sprite> diceImages = null;
     private List<Image> diceRoll = null;
+    private Image investigatorImage = null;
+    private Button investigateButton = null;
 
-    public LocationState(GameLoader gameManager, StateMachine stateMachine, GameObject locationPanel, Image locationImage, TMP_Text locationLabel,
-        List<Image> first, List<Image> second, List<Image> third, List<Sprite> dice, List<Image> diceRoll) : base(gameManager, stateMachine)
+    public LocationState(StateMachine stateMachine, GameObject locationPanel, Image locationImage, TMP_Text locationLabel,
+        List<Image> first, List<Image> second, List<Image> third, List<Sprite> dice, List<Image> diceRoll,
+        Image investigatorImage, Button investigateButton) : base( stateMachine)
     {
         this.locationPanel = locationPanel;
         this.locationImage = locationImage;
@@ -29,11 +32,16 @@ public class LocationState : State
         diceImages = dice;
 
         this.diceRoll = diceRoll;
+        this.investigatorImage = investigatorImage;
+        this.investigateButton = investigateButton;
+
+        investigateButton.onClick.AddListener(() => { ShowDiceRoll(); });
     }
 
     public override void Enter()
     {
         locationPanel.gameObject.SetActive(true);
+        investigatorImage.sprite = location.investigatorPortrait[GameData.Instance.playerTurn];
         ResetDices();
         FillTests();
     }
@@ -53,8 +61,7 @@ public class LocationState : State
         {
             diceRoll[index].sprite = diceImages[(int)diceValue];
             index++;
-        }
-        
+        }        
     }
 
     private void FillTests()
@@ -75,6 +82,18 @@ public class LocationState : State
             }
             else images[i].gameObject.SetActive(false);            
         }
+    }
+
+    private void ShowDiceRoll()
+    {
+        List<Dice> roll = DiceRoll.GetDiceRoll(6);
+
+        for (int i = 0; i < roll.Count; i++)
+        {
+            diceRoll[i].sprite = diceImages[(int)roll[i]];
+        }
+
+        Debug.Log(DiceRoll.CheckDiceTest(location.firstDiceTest, roll));
     }
 
     public void GetLocation(LocationScriptable location)

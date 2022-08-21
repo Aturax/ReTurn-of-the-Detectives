@@ -220,6 +220,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Recuadro
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 4
+        width: 124
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af5213960b17ed0409b54fad0c120536
+      internalID: 1022589122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -236,6 +257,7 @@ TextureImporter:
       Map: 849308105
       Panel: -1684513416
       Calendar: 1756379570
+      Recuadro: 1022589122
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
