@@ -10,5 +10,5 @@ public class LocationScriptable : ScriptableObject
     public List<Dice> firstDiceTest;
     public List<Dice> secondDiceTest;
     public List<Dice> thirdDiceTest;
-    public Image image;
+    public Sprite sprite;
 }

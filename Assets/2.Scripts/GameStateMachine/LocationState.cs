@@ -64,6 +64,7 @@ public class LocationState : State
     public void GetLocation(LocationScriptable location)
     {
         this.location = location;
+        locationImage.sprite = location.sprite;
         locationLabel.text = location.name;
     }
 }

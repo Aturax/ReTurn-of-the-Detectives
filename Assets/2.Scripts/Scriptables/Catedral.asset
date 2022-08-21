@@ -16,4 +16,4 @@ MonoBehaviour:
   firstDiceTest: 010000000100000002000000
   secondDiceTest: 0300000003000000
   thirdDiceTest: 010000000100000003000000
-  image: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 4b8ebe0e06a05ce46aa84309c05f4262, type: 3}
