@@ -47,9 +47,14 @@ public class GameData
         donkeyDices = 0;
     }
 
+    public void LoseDice()
+    {
+        if (dicesAvailable > 0) dicesAvailable--;
+    }
+
     public void RecoverDices()
     {
-        dicesAvailable += 6 - donkeyDices;         
+        dicesAvailable = 6;
     }
 
     public void ResetTaskPassed()
@@ -81,6 +86,16 @@ public class GameData
     public bool IsLocationCompleted(int index)
     {
         return locationsPassed[index];
+    }
+
+    public int LocationsPassed()
+    {
+        int passed = 0;
+        for (int i = 0; i < locationsPassed.Length; i++)
+        {
+            if (locationsPassed[i]) passed++;
+        }
+        return passed;
     }
 
     public void ChangeTurn()

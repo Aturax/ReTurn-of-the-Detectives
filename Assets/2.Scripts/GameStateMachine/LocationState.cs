@@ -18,9 +18,15 @@ public class LocationState : State
     private GameObject[] tasksIndicators = null;
     private int selectedTask = 0;
 
+    private GameObject locationEndedWindow = null;
+    private TMP_Text locationEndedHeader = null;
+    private TMP_Text locationEndedText = null;
+    private Button continueButton = null;
+
     public LocationState(StateMachine stateMachine, GameObject locationPanel, Image locationImage, TMP_Text locationLabel,
         TasksImages[] tasksImages, List<Sprite> dice, List<Image> diceRoll, Image investigatorImage, Button investigateButton,
-        GameObject[] completedTasks, GameObject[] tasksIndicators) : base( stateMachine)
+        GameObject[] completedTasks, GameObject[] tasksIndicators, GameObject locationEndedWindow, TMP_Text locationEndedHeader,
+        TMP_Text locationEndedText, Button continueButton) : base( stateMachine)
     {
         this.locationPanel = locationPanel;
         this.locationImage = locationImage;
@@ -35,8 +41,13 @@ public class LocationState : State
         this.investigateButton = investigateButton;
         this.completedTasks = completedTasks;
         this.tasksIndicators = tasksIndicators;
+        this.locationEndedWindow = locationEndedWindow;
+        this.locationEndedHeader = locationEndedHeader;
+        this.locationEndedText = locationEndedText;
+        this.continueButton = continueButton;
 
-        investigateButton.onClick.AddListener(() => { ShowDiceRoll(); });
+        investigateButton.onClick.AddListener(() => { RollDices(); });
+        continueButton.onClick.AddListener(() => { LocationEnded(); });
     }
 
     public override void Enter()
@@ -55,6 +66,7 @@ public class LocationState : State
     public override void Exit()
     {
         locationPanel.gameObject.SetActive(false);
+        locationEndedWindow.SetActive(false);
     }
 
     private void ResetDices()
@@ -64,8 +76,10 @@ public class LocationState : State
         foreach(Dice diceValue in System.Enum.GetValues(typeof(Dice)))
         {
             diceRoll[index].sprite = diceImages[(int)diceValue];
+            diceRoll[index].gameObject.SetActive(true);
             index++;
-        }        
+        }
+        GameData.Instance.RecoverDices();
     }
 
     private void ResetIndicators()
@@ -110,13 +124,23 @@ public class LocationState : State
         }
     }
 
-    private void ShowDiceRoll()
+    private void RollDices()
     {
-        List<Dice> roll = DiceRoll.GetDiceRoll(6);
+        if (GameData.Instance.dicesAvailable < location.diceTasks[selectedTask].task.Length) LocationFailed();
+            
+        List<Dice> roll = DiceRoll.GetDiceRoll(GameData.Instance.dicesAvailable);
 
-        for (int i = 0; i < roll.Count; i++)
+        for (int i = 0; i < diceRoll.Count; i++)
         {
-            diceRoll[i].sprite = diceImages[(int)roll[i]];
+            if (i < GameData.Instance.dicesAvailable)
+            {
+                diceRoll[i].gameObject.SetActive(true);
+                diceRoll[i].sprite = diceImages[(int)roll[i]];
+            }
+            else
+            {
+                diceRoll[i].gameObject.SetActive(false);
+            }
         }
 
         CheckDiceTask(location.diceTasks[selectedTask].task, roll);
@@ -132,13 +156,18 @@ public class LocationState : State
             completedTasks[selectedTask].SetActive(DiceRoll.CheckDiceTask(task, roll));
             completedTasks[selectedTask].SetActive(true);
             GameData.Instance.SetTaskPassed(selectedTask);
-            selectedTask++;            
+            GameData.Instance.RecoverDices();
+            selectedTask++;
+        }
+        else
+        {
+            GameData.Instance.LoseDice();
         }
 
         if (selectedTask == 3)
         {
             GameData.Instance.SetLocationPassed(location.number);
-            stateMachine.ChangeState(((GameSM)stateMachine).cityState);
+            LocationSucceded();
         }
         else
         {
@@ -151,5 +180,24 @@ public class LocationState : State
         this.location = location;
         locationImage.sprite = location.sprite;
         locationLabel.text = location.name;
+    }
+
+    private void LocationFailed()
+    {
+        locationEndedWindow.SetActive(true);
+        locationEndedHeader.text = "Fracaso";
+        locationEndedText.text = "No has conseguido averiguar nada";
+    }
+
+    private void LocationSucceded()
+    {
+        locationEndedWindow.SetActive(true);
+        locationEndedHeader.text = "Enhorabuena";
+        locationEndedText.text = "Estas un poco más cerca del asesino";
+    }
+
+    private void LocationEnded()
+    {
+        stateMachine.ChangeState(((GameSM)stateMachine).cityState);
     }
 }

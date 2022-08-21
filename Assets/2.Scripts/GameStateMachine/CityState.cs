@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class CityState : State
 {
@@ -18,9 +19,14 @@ public class CityState : State
     private GameObject[] frames = null;
     private GameObject[] completed = null;
 
+    private GameObject gameOverWindow = null;
+    private TMP_Text gameOverLabel = null;
+    private TMP_Text gameOverText = null;
+    private Button continueButton = null;    
+
     public CityState(StateMachine stateMachine, GameObject cityPanel, TMP_Text calendar, GameObject askForTravel, Button[] locationsPanelButtons,
         Button[] locationsNumberButtons, List<LocationScriptable> locations, TMP_Text destination, Button travel, GameObject[] frames,
-        GameObject[] completed) : base( stateMachine)
+        GameObject[] completed, GameObject gameOverWindow, TMP_Text gameOverLabel, TMP_Text gameOverText, Button continueButton) : base( stateMachine)
     {
         this.cityPanel = cityPanel;
         this.calendar = calendar;
@@ -32,7 +38,10 @@ public class CityState : State
         this.travel = travel;
         this.frames = frames;
         this.completed = completed;
-        
+        this.gameOverWindow = gameOverWindow;
+        this.gameOverLabel = gameOverLabel;
+        this.gameOverText = gameOverText;
+        this.continueButton = continueButton;        
 
         for (int i = 0; i < locationsPanelButtons.Length; i++)
         {
@@ -47,6 +56,7 @@ public class CityState : State
         }
         
         travel.onClick.AddListener(() => { TravelTo(locationIndex); });
+        continueButton.onClick.AddListener(() => { EndGame(); });
     }
 
     public override void Enter()
@@ -63,6 +73,7 @@ public class CityState : State
     {
         askForTravel.SetActive(false);
         cityPanel.gameObject.SetActive(false);
+        gameOverWindow.SetActive(false);
     }
 
     private void CheckTurn()
@@ -86,10 +97,16 @@ public class CityState : State
     private void CheckGameOver()
     {
         calendar.text = GameData.Instance.DayGone().ToString();
+        
         if (GameData.Instance.DaysLeft < 0)
         {
             calendar.text = "0";
-            //TODO: GameOver
+            GameOverWindow();
+        }
+
+        if (GameData.Instance.LocationsPassed() == 3)
+        {
+            WinnerWindow();
         }
     }
 
@@ -104,5 +121,26 @@ public class CityState : State
     {
         ((GameSM)stateMachine).locationState.GetLocation(locations[location]);
         stateMachine.ChangeState(((GameSM)stateMachine).locationState);
+    }
+
+    private void WinnerWindow()
+    {
+        gameOverWindow.SetActive(true);
+        gameOverLabel.text = "Enhorabuena";
+        gameOverText.text = "El asesino ha sido atrapado";
+        ((GameSM)stateMachine).gameOverState.SetSprite(true);
+    }
+
+    private void GameOverWindow()
+    {
+        gameOverWindow.SetActive(true);
+        gameOverLabel.text = "Fracasaste";
+        gameOverText.text = "El asesino ha conseguido escapar";
+        ((GameSM)stateMachine).gameOverState.SetSprite(false);
+    }
+
+    private void EndGame()
+    {
+        stateMachine.ChangeState(((GameSM)stateMachine).gameOverState);
     }
 }

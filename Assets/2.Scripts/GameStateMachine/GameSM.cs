@@ -8,6 +8,7 @@ public class GameSM : StateMachine
     public MainMenuState mainMenuState;
     public CityState cityState;
     public LocationState locationState;
+    public GameOverState gameOverState;
 
     protected override State GetInitialState()
     {
