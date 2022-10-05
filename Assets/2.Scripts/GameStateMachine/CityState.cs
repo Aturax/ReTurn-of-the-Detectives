@@ -1,53 +1,33 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 public class CityState : State
 {
-    private AudioSource audiosource = null;
-    private AudioClip cityClip = null;
+    [SerializeField] private AudioSource audiosource = null;
+    [SerializeField] private AudioClip cityClip = null;
 
-    private GameObject cityPanel = null;
-    private TMP_Text calendar = null;
-    private GameObject askForTravel = null;
-    private Button[] locationsPanelButtons = null;
-    private Button[] locationsNumberButtons = null;
-    private Button travel = null;
-    private List<LocationScriptable> locations = null;
-    private TMP_Text destination = null;
+    [SerializeField] private GameObject cityPanel = null;
+    [SerializeField] private TMP_Text calendar = null;
+    [SerializeField] private GameObject askForTravel = null;
+    [SerializeField] private Button[] locationsPanelButtons = null;
+    [SerializeField] private Button[] locationsNumberButtons = null;
+    [SerializeField] private Button travel = null;
+    [SerializeField] private List<LocationScriptable> locations = null;
+    [SerializeField] private TMP_Text destination = null;
+    [SerializeField] private GameObject[] characterFrames = null;
+    [SerializeField] private GameObject[] completed = null;
+
+    [SerializeField] private GameObject gameOverWindow = null;
+    [SerializeField] private TMP_Text gameOverLabel = null;
+    [SerializeField] private TMP_Text gameOverText = null;
+    [SerializeField] private Button continueButton = null;
+
     private int locationIndex = 0;
-    private GameObject[] frames = null;
-    private GameObject[] completed = null;
 
-    private GameObject gameOverWindow = null;
-    private TMP_Text gameOverLabel = null;
-    private TMP_Text gameOverText = null;
-    private Button continueButton = null;    
-
-    public CityState(StateMachine stateMachine, AudioSource audiosource, AudioClip cityClip, GameObject cityPanel, TMP_Text calendar, GameObject askForTravel, Button[] locationsPanelButtons,
-        Button[] locationsNumberButtons, List<LocationScriptable> locations, TMP_Text destination, Button travel, GameObject[] frames,
-        GameObject[] completed, GameObject gameOverWindow, TMP_Text gameOverLabel, TMP_Text gameOverText, Button continueButton) : base( stateMachine)
+    public override void PreaLoadState()
     {
-        this.audiosource = audiosource;
-        this.cityClip = cityClip;
-        this.cityPanel = cityPanel;
-        this.calendar = calendar;
-        this.askForTravel = askForTravel;
-        this.locationsPanelButtons = locationsPanelButtons;
-        this.locationsNumberButtons = locationsNumberButtons;
-        this.locations = locations;
-        this.destination = destination;
-        this.travel = travel;
-        this.frames = frames;
-        this.completed = completed;
-        this.gameOverWindow = gameOverWindow;
-        this.gameOverLabel = gameOverLabel;
-        this.gameOverText = gameOverText;
-        this.continueButton = continueButton;        
-
         for (int i = 0; i < locationsPanelButtons.Length; i++)
         {
             int index = i;
@@ -64,7 +44,7 @@ public class CityState : State
         continueButton.onClick.AddListener(() => { EndGame(); });
     }
 
-    public override void Enter()
+    public async override void Enter()
     {
         audiosource.clip = cityClip;
         audiosource.Play();
@@ -72,10 +52,9 @@ public class CityState : State
         CheckTurn();
         CheckCompletedTasks();
         CheckGameOver();
+        await stateMachine.Fade(0.0f, 1.0f); // TODO: Add sound
     }
-    public override void HandleInput() { }
-    public override void Update() { }
-    public override void FixedUpdate() { }
+
     public override void Exit()
     {
         askForTravel.SetActive(false);
@@ -86,8 +65,8 @@ public class CityState : State
     private void CheckTurn()
     {
         GameData.Instance.ChangeTurn();
-        frames[0].SetActive(GameData.Instance.playerTurn == 0);
-        frames[1].SetActive(GameData.Instance.playerTurn == 1);
+        characterFrames[0].SetActive(GameData.Instance.playerTurn == 1);
+        characterFrames[1].SetActive(GameData.Instance.playerTurn == 0);
     }
 
     private void CheckCompletedTasks()
@@ -127,9 +106,10 @@ public class CityState : State
         destination.text = locations[location].name;
     }
 
-    private void TravelTo(int location)
+    private async void TravelTo(int location)
     {
         ((GameSM)stateMachine).locationState.GetLocation(locations[location]);
+        await stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
         stateMachine.ChangeState(((GameSM)stateMachine).locationState);
     }
 

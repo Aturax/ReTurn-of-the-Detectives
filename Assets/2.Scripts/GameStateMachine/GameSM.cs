@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class GameSM : StateMachine
 {
-    public MainMenuState mainMenuState;
-    public CityState cityState;
-    public LocationState locationState;
-    public GameOverState gameOverState;
+    public MainMenuState mainMenuState = null;
+    public CityState cityState = null;
+    public LocationState locationState = null;
+    public GameOverState gameOverState = null;
 
     protected override State GetInitialState()
     {

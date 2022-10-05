@@ -1,6 +1,12 @@
+using System.Threading.Tasks;
+using UnityEditor;
+using UnityEngine;
+
 public abstract class StateMachine
 {
-    private State currentState;
+    private State currentState = null;
+    private bool started = false;
+    private Fader fader = null;
 
     public void StartStateMachine()
     {
@@ -9,30 +15,7 @@ public abstract class StateMachine
         {
             currentState.Enter();
         }
-    }
-
-    public void HandleInput()
-    {
-        if (currentState != null)
-        {
-            currentState.HandleInput();
-        }
-    }
-
-    public void Update()
-    {
-        if (currentState != null)
-        {
-            currentState.Update();
-        }
-    }
-
-    public void FixedUpdate()
-    {
-        if (currentState != null)
-        {
-            currentState.FixedUpdate();
-        }
+        started = true;
     }
 
     public void ChangeState(State newState)
@@ -48,5 +31,25 @@ public abstract class StateMachine
     public string GetCurrentState()
     {
         return currentState.ToString();
+    }
+
+    public bool IsStarted()
+    {
+        return started;
+    }
+
+    public void SetFader(Fader fader)
+    {
+        this.fader = fader;
+    }
+
+    public async Task Fade(float alpha, float time) 
+    {
+        await fader.Fade(alpha, time);
+    }
+
+    public async Task Fade(float alpha, float time, AudioClip clip)
+    {
+        await fader.Fade(alpha, time, clip);
     }
 }

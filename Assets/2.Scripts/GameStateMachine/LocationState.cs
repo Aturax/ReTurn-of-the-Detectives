@@ -3,70 +3,54 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[System.Serializable]
+public class TasksImages
+{
+    public Image[] taskImages;
+}
+
 public class LocationState : State
 {
-    private AudioSource audiosource = null;
-    private GameObject locationPanel = null;
+    [SerializeField] private AudioSource audiosource = null;
+    [SerializeField] private GameObject locationPanel = null;
+    [SerializeField] private Image paperLocationImage = null;
+    [SerializeField] private TMP_Text paperLocationLabel = null;
+    [SerializeField] private TasksImages[] tasksImages = null;
+    [SerializeField] private List<Sprite> diceImages = null;
+    [SerializeField] private List<Image> diceRoll = null;
+    [SerializeField] private Image investigatorPortrait = null;
+    [SerializeField] private Button investigateButton = null;
+    [SerializeField] private GameObject[] completedTasks = null;
+    [SerializeField] private GameObject[] tasksIndicators = null;
+
     private LocationScriptable location = null;
-    private Image locationImage = null;
-    private TMP_Text locationLabel = null;
-    private TasksImages[] tasksImages = null;
-    private List<Sprite> diceImages = null;
-    private List<Image> diceRoll = null;
-    private Image investigatorImage = null;
-    private Button investigateButton = null;
-    private GameObject[] completedTasks = null;
-    private GameObject[] tasksIndicators = null;
     private int selectedTask = 0;
 
-    private GameObject locationEndedWindow = null;
-    private TMP_Text locationEndedHeader = null;
-    private TMP_Text locationEndedText = null;
-    private Button continueButton = null;
+    [SerializeField] private GameObject locationEndedWindow = null;
+    [SerializeField] private TMP_Text locationEndedHeader = null;
+    [SerializeField] private TMP_Text locationEndedText = null;
+    [SerializeField] private Button continueButton = null;
 
-    public LocationState(StateMachine stateMachine, AudioSource audiosource, GameObject locationPanel, Image locationImage, TMP_Text locationLabel,
-        TasksImages[] tasksImages, List<Sprite> dice, List<Image> diceRoll, Image investigatorImage, Button investigateButton,
-        GameObject[] completedTasks, GameObject[] tasksIndicators, GameObject locationEndedWindow, TMP_Text locationEndedHeader,
-        TMP_Text locationEndedText, Button continueButton) : base( stateMachine)
-    {
-        this.audiosource = audiosource;
-        this.locationPanel = locationPanel;
-        this.locationImage = locationImage;
-        this.locationLabel = locationLabel;
-
-        this.tasksImages = tasksImages;
-
-        diceImages = dice;
-
-        this.diceRoll = diceRoll;
-        this.investigatorImage = investigatorImage;
-        this.investigateButton = investigateButton;
-        this.completedTasks = completedTasks;
-        this.tasksIndicators = tasksIndicators;
-        this.locationEndedWindow = locationEndedWindow;
-        this.locationEndedHeader = locationEndedHeader;
-        this.locationEndedText = locationEndedText;
-        this.continueButton = continueButton;
-
+    public override void PreaLoadState()
+    {        
         investigateButton.onClick.AddListener(() => { RollDices(); });
         continueButton.onClick.AddListener(() => { LocationEnded(); });
     }
 
-    public override void Enter()
+    public async override void Enter()
     {
         audiosource.clip = location.clip;
         audiosource.Play();
         locationPanel.gameObject.SetActive(true);
-        investigatorImage.sprite = location.investigatorPortrait[GameData.Instance.playerTurn];
+        investigatorPortrait.sprite = location.investigatorPortrait[GameData.Instance.playerTurn];
         selectedTask = 0;
         ResetDices();
         FillTasks();
         ResetIndicators();
         SelectTask();
+        await stateMachine.Fade(0.0f, 1.0f); // TODO: Add sound
     }
-    public override void HandleInput() { }
-    public override void Update() { }
-    public override void FixedUpdate() { }
+    
     public override void Exit()
     {
         locationPanel.gameObject.SetActive(false);
@@ -182,8 +166,8 @@ public class LocationState : State
     public void GetLocation(LocationScriptable location)
     {
         this.location = location;
-        locationImage.sprite = location.sprite;
-        locationLabel.text = location.name;
+        paperLocationImage.sprite = location.sprite;
+        paperLocationLabel.text = location.name;
     }
 
     private void LocationFailed()
@@ -200,8 +184,9 @@ public class LocationState : State
         locationEndedText.text = "Estas un poco más cerca del asesino";
     }
 
-    private void LocationEnded()
+    private async void LocationEnded()
     {
+        await stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
         stateMachine.ChangeState(((GameSM)stateMachine).cityState);
     }
 }

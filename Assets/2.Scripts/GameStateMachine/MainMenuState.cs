@@ -1,33 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuState : State
 {
-    private GameObject mainMenu = null;    
+    [SerializeField] private GameObject mainMenu = null;
+    [SerializeField] private Button startButton = null;    
 
-    public MainMenuState(StateMachine stateMachine,  GameObject mainMenu) : base(stateMachine)
+    private void Awake()
     {
-        this.mainMenu = mainMenu;
+        startButton.onClick.AddListener(() => StartGame());
     }
 
-    public override void Enter()
+    public async override void Enter()
     {
         mainMenu.SetActive(true);
+        await stateMachine.Fade(0.0f, 1.5f); // TODO: Add sound
         GameData.Instance.ResetData();
     }
 
-    public override void HandleInput() 
+    private async void StartGame()
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            stateMachine.ChangeState(((GameSM)stateMachine).cityState);
-        }
+        await stateMachine.Fade(1.0f, 0.5f); // TODO: Add sound
+        stateMachine.ChangeState(((GameSM)stateMachine).cityState);
     }
-    public override void Update() { }
-    public override void FixedUpdate() { }
+
     public override void Exit()
     {
-        mainMenu.SetActive(false);
+        mainMenu.SetActive(false);        
     }
 }

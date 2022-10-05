@@ -1,15 +1,16 @@
-public class State
+using UnityEngine;
+
+public class State: MonoBehaviour
 {
     protected StateMachine stateMachine;
 
-    public State(StateMachine stateMachine)
+    public void LoadStateMachine(StateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
+        PreaLoadState();
     }
 
+    public virtual void PreaLoadState() { }
     public virtual void Enter() { }
-    public virtual void HandleInput() { }
-    public virtual void Update() { }
-    public virtual void FixedUpdate() { }
     public virtual void Exit() { }
 }

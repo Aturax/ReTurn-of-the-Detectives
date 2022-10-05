@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5d07e7c6cda3abc4fa2e62b37c5fac90
+guid: 5c46a54922b822f428a4ccde187d4bc7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -66,7 +66,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -101,11 +101,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcc21ccc0a90bbe49976b151475db47b
-      internalID: 1756379570
+      spriteID: a69a3cd5748eadd44b12a41458dd6469
+      internalID: -2032367404
       vertices: []
       indices: 
       edges: []
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52c542722f3203846ad32078450b01e5
-      internalID: 849308105
+      spriteID: 4c6fa71511af82243bde2d4a7031f00c
+      internalID: -1268204947
       vertices: []
       indices: 
       edges: []
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bc388bd98cd3134a82ab9e7e62ba049
-      internalID: -1684513416
+      spriteID: e276c5902263dad4693d3ffb83881cf3
+      internalID: -1200100110
       vertices: []
       indices: 
       edges: []
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39eef20ec9b602949a26070fb41016b9
-      internalID: -267029307
+      spriteID: 387a8792679c9e749a6cdd1b830acf72
+      internalID: 1030307484
       vertices: []
       indices: 
       edges: []
@@ -214,29 +214,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38b9f23141c9f634eb28ae5c8849a81f
-      internalID: -899293795
+      spriteID: 26d4dbc9d67146742be4f7b0061f7285
+      internalID: -1701741275
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Recuadro
+      name: Frame
       rect:
         serializedVersion: 2
-        x: 94
-        y: 4
+        x: 91
+        y: 5
         width: 124
         height: 39
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af5213960b17ed0409b54fad0c120536
-      internalID: 1022589122
+      spriteID: f7ecdf49ade0d9040b675c2903fc81f1
+      internalID: -1582529199
       vertices: []
       indices: 
       edges: []
@@ -245,8 +245,8 @@ TextureImporter:
       name: Arrow
       rect:
         serializedVersion: 2
-        x: 235
-        y: 16
+        x: 221
+        y: 17
         width: 15
         height: 15
       alignment: 0
@@ -256,8 +256,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6197f1ad5a1581a4b9fe89a942731bba
-      internalID: 1115593776
+      spriteID: 1cfc96b34fb45b24bae9d4b7246dcca6
+      internalID: 214528948
       vertices: []
       indices: 
       edges: []
@@ -273,13 +273,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Male: -267029307
-      Female: -899293795
-      Arrow: 1115593776
-      Map: 849308105
-      Panel: -1684513416
-      Calendar: 1756379570
-      Recuadro: 1022589122
+      Male: 1030307484
+      Female: -1701741275
+      Arrow: 214528948
+      Map: -1268204947
+      Frame: -1582529199
+      Panel: -1200100110
+      Calendar: -2032367404
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

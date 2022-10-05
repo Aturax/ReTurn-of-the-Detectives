@@ -3,36 +3,31 @@ using UnityEngine.UI;
 
 public class GameOverState : State
 {
-    private Image gameOverImage = null;
-    private Sprite winSprite = null;
-    private Sprite looseSprite = null;
-    private int push = 0;
+    [SerializeField] private Image gameOverImage = null;
+    [SerializeField] private Sprite winSprite = null;
+    [SerializeField] private Sprite looseSprite = null;
+    [SerializeField] private Button continueButton = null;    
 
-    public GameOverState(StateMachine stateMachine, Image gameOverImage, Sprite winSprite, Sprite looseSprite) : base(stateMachine)
+    private void Awake()
     {
-        this.gameOverImage = gameOverImage;
-        this.winSprite = winSprite;
-        this.looseSprite = looseSprite;
+        continueButton.onClick.AddListener(() => ToMainMenu());
     }
 
-    public override void Enter()
+    public async override void Enter()
     {
-        gameOverImage.gameObject.SetActive(true);        
+        gameOverImage.gameObject.SetActive(true);
+        await stateMachine.Fade(0.0f, 1.0f); // TODO: Add sound        
     }
 
-    public override void HandleInput()
+    private async void ToMainMenu()
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            push++;
-        }
-
-        if (push == 2) stateMachine.ChangeState(((GameSM)stateMachine).mainMenuState);
+        await stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
+        stateMachine.ChangeState(((GameSM)stateMachine).mainMenuState);
     }
 
     public override void Exit()
     {
-        gameOverImage.gameObject.SetActive(false);
+        gameOverImage.gameObject.SetActive(false);        
     }
 
     public void SetSprite(bool winner)
