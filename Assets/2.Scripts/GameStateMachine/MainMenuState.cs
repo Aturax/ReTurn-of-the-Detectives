@@ -21,7 +21,7 @@ public class MainMenuState : State
     private async void StartGame()
     {
         await stateMachine.Fade(1.0f, 0.5f); // TODO: Add sound
-        stateMachine.ChangeState(((GameSM)stateMachine).cityState);
+        stateMachine.ChangeState(stateMachine.cityState);
     }
 
     public override void Exit()

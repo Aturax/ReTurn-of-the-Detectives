@@ -108,9 +108,9 @@ public class CityState : State
 
     private async void TravelTo(int location)
     {
-        ((GameSM)stateMachine).locationState.GetLocation(locations[location]);
+        stateMachine.locationState.GetLocation(locations[location]);
         await stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
-        stateMachine.ChangeState(((GameSM)stateMachine).locationState);
+        stateMachine.ChangeState(stateMachine.locationState);
     }
 
     private void WinnerWindow()
@@ -118,7 +118,7 @@ public class CityState : State
         gameOverWindow.SetActive(true);
         gameOverLabel.text = "Enhorabuena";
         gameOverText.text = "El asesino ha sido atrapado";
-        ((GameSM)stateMachine).gameOverState.SetSprite(true);
+        stateMachine.gameOverState.SetSprite(true);
     }
 
     private void GameOverWindow()
@@ -126,11 +126,11 @@ public class CityState : State
         gameOverWindow.SetActive(true);
         gameOverLabel.text = "Fracasaste";
         gameOverText.text = "El asesino ha conseguido escapar";
-        ((GameSM)stateMachine).gameOverState.SetSprite(false);
+        stateMachine.gameOverState.SetSprite(false);
     }
 
     private void EndGame()
     {
-        stateMachine.ChangeState(((GameSM)stateMachine).gameOverState);
+        stateMachine.ChangeState(stateMachine.gameOverState);
     }
 }

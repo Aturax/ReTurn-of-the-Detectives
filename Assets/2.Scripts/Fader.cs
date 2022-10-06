@@ -1,41 +1,36 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(Image))]
-public class Fader : MonoBehaviour
+[Serializable]
+public class Fader
 {
-    private AudioSource audioSource = null;
-    private Image imageFader = null;    
+    [SerializeField] private AudioSource audioSource = null;
+    [SerializeField] private Image imageFader = null;    
 
-    private void Awake()
+    public void LoadFader()
     {
-        audioSource = GetComponent<AudioSource>();
-        imageFader = GetComponent<Image>();
-        
         imageFader.color = Color.black;
-    }
+    }    
 
     public async Task Fade(float alpha, float time)
     {
-        int wait = (int)time * 1000;
         imageFader.CrossFadeAlpha(alpha, time, false);
-
+        
+        int wait = Mathf.RoundToInt(time * 1000);
+        
         await Task.Delay(wait);
-
-        imageFader.raycastTarget = (alpha == 1.0f);
-         
+        imageFader.raycastTarget = (alpha == 1.0f);         
     }
 
     public async Task Fade(float alpha, float time, AudioClip clip)
     {
-        int wait = (int)time;
-        if (clip.length > wait) wait = (int)clip.length;
-        wait *= 1000;
-        
         imageFader.CrossFadeAlpha(alpha, time, false);
         audioSource.PlayOneShot(clip);
+
+        int wait = clip.length > time ? Mathf.RoundToInt(clip.length * 1000) : Mathf.RoundToInt(time * 1000);
+        
         await Task.Delay(wait);
         imageFader.raycastTarget = (alpha == 1.0f);
     }

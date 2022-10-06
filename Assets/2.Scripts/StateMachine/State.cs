@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class State: MonoBehaviour
 {
-    protected StateMachine stateMachine;
+    protected GameSM stateMachine;
 
-    public void LoadStateMachine(StateMachine stateMachine)
+    public void LoadStateMachine(GameSM stateMachine)
     {
         this.stateMachine = stateMachine;
         PreaLoadState();

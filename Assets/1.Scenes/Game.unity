@@ -2917,11 +2917,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17dcd7e6e37ecc848a23d74641fe00fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuState: {fileID: 879943839}
-  cityState: {fileID: 600724102}
-  locationState: {fileID: 785623739}
-  gameOverState: {fileID: 1285620435}
-  fader: {fileID: 2036607546}
+  stateMachine:
+    mainMenuState: {fileID: 879943839}
+    cityState: {fileID: 600724102}
+    locationState: {fileID: 785623739}
+    gameOverState: {fileID: 1285620435}
+  fader:
+    audioSource: {fileID: 2036607543}
+    imageFader: {fileID: 2036607544}
 --- !u!1 &339261182
 GameObject:
   m_ObjectHideFlags: 0
@@ -13678,7 +13681,6 @@ GameObject:
   - component: {fileID: 2036607542}
   - component: {fileID: 2036607545}
   - component: {fileID: 2036607544}
-  - component: {fileID: 2036607546}
   - component: {fileID: 2036607543}
   m_Layer: 5
   m_Name: Fader
@@ -13841,18 +13843,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036607541}
   m_CullTransparentMesh: 1
---- !u!114 &2036607546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2036607541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8bae30c0423f794f95413cc300d79c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2040304113
 GameObject:
   m_ObjectHideFlags: 0

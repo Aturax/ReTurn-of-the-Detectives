@@ -22,7 +22,7 @@ public class GameOverState : State
     private async void ToMainMenu()
     {
         await stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
-        stateMachine.ChangeState(((GameSM)stateMachine).mainMenuState);
+        stateMachine.ChangeState(stateMachine.mainMenuState);
     }
 
     public override void Exit()

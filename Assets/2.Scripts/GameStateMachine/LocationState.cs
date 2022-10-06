@@ -11,6 +11,9 @@ public class TasksImages
 
 public class LocationState : State
 {
+    private LocationScriptable location = null;
+    private int selectedTask = 0;
+
     [SerializeField] private AudioSource audiosource = null;
     [SerializeField] private GameObject locationPanel = null;
     [SerializeField] private Image paperLocationImage = null;
@@ -21,11 +24,9 @@ public class LocationState : State
     [SerializeField] private Image investigatorPortrait = null;
     [SerializeField] private Button investigateButton = null;
     [SerializeField] private GameObject[] completedTasks = null;
-    [SerializeField] private GameObject[] tasksIndicators = null;
+    [SerializeField] private GameObject[] tasksIndicators = null;    
 
-    private LocationScriptable location = null;
-    private int selectedTask = 0;
-
+    [Header("Location Window")]
     [SerializeField] private GameObject locationEndedWindow = null;
     [SerializeField] private TMP_Text locationEndedHeader = null;
     [SerializeField] private TMP_Text locationEndedText = null;
@@ -187,6 +188,6 @@ public class LocationState : State
     private async void LocationEnded()
     {
         await stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
-        stateMachine.ChangeState(((GameSM)stateMachine).cityState);
+        stateMachine.ChangeState(stateMachine.cityState);
     }
 }
