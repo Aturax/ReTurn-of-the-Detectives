@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Serializable]
 public class GameOverState : State
 {
     [SerializeField] private Image gameOverImage = null;
@@ -8,13 +10,10 @@ public class GameOverState : State
     [SerializeField] private Sprite looseSprite = null;
     [SerializeField] private Button continueButton = null;    
 
-    private void Awake()
-    {
-        continueButton.onClick.AddListener(() => ToMainMenu());
-    }
-
     public async override void Enter()
     {
+        continueButton.onClick.AddListener(() => ToMainMenu());
+
         gameOverImage.gameObject.SetActive(true);
         await stateMachine.Fade(0.0f, 1.0f); // TODO: Add sound        
     }
@@ -30,7 +29,7 @@ public class GameOverState : State
         gameOverImage.gameObject.SetActive(false);        
     }
 
-    public void SetSprite(bool winner)
+    public void IsWinner(bool winner)
     {
         if (winner) gameOverImage.sprite = winSprite;
         else gameOverImage.sprite = looseSprite;

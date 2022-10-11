@@ -1,18 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
+[Serializable]
 public class MainMenuState : State
 {
     [SerializeField] private GameObject mainMenu = null;
-    [SerializeField] private Button startButton = null;    
-
-    private void Awake()
-    {
-        startButton.onClick.AddListener(() => StartGame());
-    }
+    [SerializeField] private Button startButton = null;
 
     public async override void Enter()
     {
+        startButton.onClick.AddListener(() => StartGame());
+
         mainMenu.SetActive(true);
         await stateMachine.Fade(0.0f, 1.5f); // TODO: Add sound
         GameData.Instance.ResetData();

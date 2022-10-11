@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameLoader : MonoBehaviour
 {
     [SerializeField] private GameSM stateMachine = null;
 

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Fader
 {
     [SerializeField] private AudioSource audioSource = null;
-    [SerializeField] private Image imageFader = null;    
+    [SerializeField] private Image imageFader = null;
 
     public void LoadFader()
     {

@@ -1,6 +1,7 @@
-using System.Collections;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Dice
 {
@@ -19,8 +20,11 @@ public static class DiceRoll
         List<Dice> diceRoll = new List<Dice>();        
 
         for (int i = 0; i < diceNumber; i++)
-        {
-            diceRoll.Add((Dice)Random.Range(0, System.Enum.GetValues(typeof(Dice)).Length - 1));            
+        {            
+            var dices = System.Enum.GetValues(typeof(Dice));
+            int index = Random.Range(0, dices.Length);
+            Dice dice = (Dice)dices.GetValue(index);
+            diceRoll.Add(dice);
         }
 
         return diceRoll;
@@ -37,5 +41,10 @@ public static class DiceRoll
             else return false;
         }
         return true;
+    }
+
+    public static void FadeDice(Image diceImage, float alpha, float time)
+    {
+        diceImage.CrossFadeAlpha(alpha, time, false);
     }
 }

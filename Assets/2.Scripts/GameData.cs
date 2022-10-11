@@ -3,7 +3,7 @@ public class GameData
     private static GameData instance = null;
     
     public int DaysLeft { get; private set; } = 10;    
-    public int playerTurn { get; private set; } = 1;
+    public int playerTurn { get; private set; } = 0;
     public int dicesAvailable { get; private set; } = 6;
     public int donkeyDices = 0;
     public bool[] TaskPassed { get; private set; } = {false, false, false};
@@ -46,6 +46,11 @@ public class GameData
     public void LoseDice()
     {
         if (dicesAvailable > 0) dicesAvailable--;
+    }
+
+    public void RecoverDice()
+    {
+        if (dicesAvailable < 6) dicesAvailable++;
     }
 
     public void RecoverDices()

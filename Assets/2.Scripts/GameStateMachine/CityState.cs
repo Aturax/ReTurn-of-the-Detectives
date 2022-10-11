@@ -1,10 +1,18 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[Serializable]
 public class CityState : State
 {
+    private const string WinnerHeader = "Enhorabuena";
+    private const string WinnerBody = "El asesino ha sido atrapado";
+
+    private const string LooserHeader = "Enhorabuena";
+    private const string LooserBody = "El asesino ha sido atrapado";
+
     [SerializeField] private AudioSource audiosource = null;
     [SerializeField] private AudioClip cityClip = null;
 
@@ -20,8 +28,8 @@ public class CityState : State
     [SerializeField] private GameObject[] completed = null;
 
     [SerializeField] private GameObject gameOverWindow = null;
-    [SerializeField] private TMP_Text gameOverLabel = null;
-    [SerializeField] private TMP_Text gameOverText = null;
+    [SerializeField] private TMP_Text gameOverHeader = null;
+    [SerializeField] private TMP_Text gameOverBody = null;
     [SerializeField] private Button continueButton = null;
 
     private int locationIndex = 0;
@@ -90,12 +98,12 @@ public class CityState : State
         if (GameData.Instance.DaysLeft < 0)
         {
             calendar.text = "0";
-            GameOverWindow();
+            ShowGameOverWindow(LooserHeader, LooserBody, false);
         }
 
         if (GameData.Instance.LocationsPassed() == 3)
         {
-            WinnerWindow();
+            ShowGameOverWindow(WinnerHeader, WinnerBody, true);
         }
     }
 
@@ -113,24 +121,17 @@ public class CityState : State
         stateMachine.ChangeState(stateMachine.locationState);
     }
 
-    private void WinnerWindow()
+    private void ShowGameOverWindow(string header, string text, bool winner)
     {
         gameOverWindow.SetActive(true);
-        gameOverLabel.text = "Enhorabuena";
-        gameOverText.text = "El asesino ha sido atrapado";
-        stateMachine.gameOverState.SetSprite(true);
+        gameOverHeader.text = header;
+        gameOverBody.text = text;
+        stateMachine.gameOverState.IsWinner(winner);
     }
 
-    private void GameOverWindow()
+    private async void EndGame()
     {
-        gameOverWindow.SetActive(true);
-        gameOverLabel.text = "Fracasaste";
-        gameOverText.text = "El asesino ha conseguido escapar";
-        stateMachine.gameOverState.SetSprite(false);
-    }
-
-    private void EndGame()
-    {
+        await stateMachine.Fade(1.0f, 0.5f); // TODO: Add sound
         stateMachine.ChangeState(stateMachine.gameOverState);
     }
 }
