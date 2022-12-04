@@ -1795,7 +1795,7 @@ RectTransform:
   - {fileID: 1285620432}
   - {fileID: 2036607542}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2718,7 +2718,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &336437498
 AudioSource:
@@ -2861,7 +2861,7 @@ MonoBehaviour:
       - {fileID: 870900420}
       gameOverWindow: {fileID: 658766329}
       gameOverHeader: {fileID: 695880015}
-      gameOverText: {fileID: 1862208043}
+      gameOverBody: {fileID: 0}
       continueButton: {fileID: 786935219}
     locationState:
       audiosource: {fileID: 519420033}
@@ -8557,7 +8557,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1193023440
 GameObject:
@@ -10132,7 +10132,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1373526600
 GameObject:

@@ -18,10 +18,10 @@ public class GameSM : StateMachine
 
     public void LoadStateMachine(Fader fader)
     {
-        mainMenuState.LoadStateMachine(this);
-        cityState.LoadStateMachine(this);
-        locationState.LoadStateMachine(this);
-        gameOverState.LoadStateMachine(this);
+        mainMenuState = new MainMenuState(this);
+        cityState = new CityState(this);
+        locationState = new LocationState(this);
+        gameOverState = new GameOverState(this);
         this.fader = fader;
         fader.LoadFader();       
     }

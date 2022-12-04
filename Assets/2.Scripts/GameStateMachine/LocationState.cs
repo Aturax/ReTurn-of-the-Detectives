@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Reflection;
 
 [Serializable]
 public class TasksImages
@@ -50,7 +49,9 @@ public class LocationState : State
     [SerializeField] private TMP_Text locationEndedText = null;
     [SerializeField] private Button continueButton = null;
 
-    public override void PreaLoadState()
+    public LocationState(GameSM stateMachine) : base(stateMachine) { }
+
+    public override void LoadState()
     {
         investigateButton.onClick.AddListener(() => { RollDices(); });
         continueButton.onClick.AddListener(() => { LocationEnded(); });
@@ -85,7 +86,7 @@ public class LocationState : State
         ResetIndicators();
         SelectTask();
 
-        await stateMachine.Fade(0.0f, 1.0f); // TODO: Add sound
+        await _stateMachine.Fade(0.0f, 1.0f); // TODO: Add sound
     }
 
     public override void Exit()
@@ -385,8 +386,8 @@ public class LocationState : State
 
     private async void LocationEnded()
     {
-        await stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
-        stateMachine.ChangeState(stateMachine.cityState);
+        await _stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
+        _stateMachine.ChangeState(_stateMachine.cityState);
     }
 
     private async Task HideDiceButtons()

@@ -34,7 +34,9 @@ public class CityState : State
 
     private int locationIndex = 0;
 
-    public override void PreaLoadState()
+    public CityState(GameSM stateMachine) : base(stateMachine) { }
+
+    public override void LoadState()
     {
         for (int i = 0; i < locationsPanelButtons.Length; i++)
         {
@@ -60,7 +62,7 @@ public class CityState : State
         CheckTurn();
         CheckCompletedTasks();
         CheckGameOver();
-        await stateMachine.Fade(0.0f, 1.0f); // TODO: Add sound
+        await _stateMachine.Fade(0.0f, 1.0f); // TODO: Add sound
     }
 
     public override void Exit()
@@ -116,9 +118,9 @@ public class CityState : State
 
     private async void TravelTo(int location)
     {
-        stateMachine.locationState.GetLocation(locations[location]);
-        await stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
-        stateMachine.ChangeState(stateMachine.locationState);
+        _stateMachine.locationState.GetLocation(locations[location]);
+        await _stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
+        _stateMachine.ChangeState(_stateMachine.locationState);
     }
 
     private void ShowGameOverWindow(string header, string text, bool winner)
@@ -126,12 +128,12 @@ public class CityState : State
         gameOverWindow.SetActive(true);
         gameOverHeader.text = header;
         gameOverBody.text = text;
-        stateMachine.gameOverState.IsWinner(winner);
+        _stateMachine.gameOverState.IsWinner(winner);
     }
 
     private async void EndGame()
     {
-        await stateMachine.Fade(1.0f, 0.5f); // TODO: Add sound
-        stateMachine.ChangeState(stateMachine.gameOverState);
+        await _stateMachine.Fade(1.0f, 0.5f); // TODO: Add sound
+        _stateMachine.ChangeState(_stateMachine.gameOverState);
     }
 }

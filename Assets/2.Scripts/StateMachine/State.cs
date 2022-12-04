@@ -1,14 +1,14 @@
-public class State
+public abstract class State
 {
-    protected GameSM stateMachine;
+    protected readonly GameSM _stateMachine;
 
-    public void LoadStateMachine(GameSM stateMachine)
+    public State(GameSM stateMachine)
     {
-        this.stateMachine = stateMachine;
-        PreaLoadState();
+        _stateMachine = stateMachine;
+        LoadState();
     }
 
-    public virtual void PreaLoadState() { }
+    public virtual void LoadState() { }
     public virtual void Enter() { }
     public virtual void Exit() { }
 }

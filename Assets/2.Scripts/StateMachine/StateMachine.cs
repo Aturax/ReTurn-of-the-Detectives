@@ -8,7 +8,7 @@ public abstract class StateMachine
         if (currentState != null)
         {
             currentState.Enter();
-        }        
+        }
     }
 
     public void ChangeState(State newState)
