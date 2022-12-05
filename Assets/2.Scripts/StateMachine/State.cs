@@ -1,14 +1,16 @@
-public abstract class State
-{
-    protected readonly GameSM _stateMachine;
+using UnityEngine;
 
-    public State(GameSM stateMachine)
+public abstract class State : MonoBehaviour
+{
+    protected GameManager _stateMachine;
+
+    public void SetStateMachine(GameManager stateMachine)
     {
         _stateMachine = stateMachine;
-        LoadState();
+        PreLoadState();
     }
 
-    public virtual void LoadState() { }
+    public virtual void PreLoadState() { }
     public virtual void Enter() { }
     public virtual void Exit() { }
 }

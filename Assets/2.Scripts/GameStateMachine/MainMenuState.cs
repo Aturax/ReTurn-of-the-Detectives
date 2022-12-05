@@ -1,20 +1,15 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
 public class MainMenuState : State
 {
-    [SerializeField] private GameObject mainMenu = null;
-    [SerializeField] private Button startButton = null;
-
-    public MainMenuState(GameSM stateMachine) : base(stateMachine) { }
+    [SerializeField] private Button _startButton = null;
 
     public async override void Enter()
     {
-        startButton.onClick.AddListener(() => StartGame());
+        _startButton.onClick.AddListener(() => StartGame());
 
-        mainMenu.SetActive(true);
+        gameObject.SetActive(true);
         await _stateMachine.Fade(0.0f, 1.5f); // TODO: Add sound
         GameData.Instance.ResetData();
     }
@@ -22,11 +17,11 @@ public class MainMenuState : State
     private async void StartGame()
     {
         await _stateMachine.Fade(1.0f, 0.5f); // TODO: Add sound
-        _stateMachine.ChangeState(_stateMachine.cityState);
+        _stateMachine.ChangeState(_stateMachine.CityState);
     }
 
     public override void Exit()
     {
-        mainMenu.SetActive(false);        
+        gameObject.SetActive(false);
     }
 }

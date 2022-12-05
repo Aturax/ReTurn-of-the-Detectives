@@ -1,32 +1,27 @@
 public class GameData
 {
-    private static GameData instance = null;
+    private static GameData _instance = null;
     
     public int DaysLeft { get; private set; } = 10;    
-    public int playerTurn { get; private set; } = 0;
-    public int dicesAvailable { get; private set; } = 6;
-    public int donkeyDices = 0;
+    public int PlayerTurn { get; private set; } = 0;
+    public int DicesAvailable { get; private set; } = 6;
+    public int DonkeyDices = 0;
     public bool[] TaskPassed { get; private set; } = {false, false, false};
-    public bool[] locationsPassed { get; private set; } = { false, true, false };
-
-    private GameData() { }
+    public bool[] LocationsStatus { get; private set; } = { false, false, false };    
 
     public static GameData Instance
     {
         get
         {
-            if (instance == null)
-            {
-                instance = new GameData();
-            }
-            return instance;
+            _instance ??= new GameData();
+            return _instance;
         }
     }
 
     public void ResetData()
     {
         DaysLeft = 10;
-        playerTurn = 1;
+        PlayerTurn = 1;
         ResetDices();
         ResetTaskPassed();
         ResetLocationsPassed();
@@ -39,23 +34,25 @@ public class GameData
 
     public void ResetDices()
     {
-        dicesAvailable = 6;
-        donkeyDices = 0;
+        DicesAvailable = 6;
+        DonkeyDices = 0;
     }
 
     public void LoseDice()
     {
-        if (dicesAvailable > 0) dicesAvailable--;
+        if (DicesAvailable > 0)
+            DicesAvailable--;
     }
 
     public void RecoverDice()
     {
-        if (dicesAvailable < 6) dicesAvailable++;
+        if (DicesAvailable < 6)
+            DicesAvailable++;
     }
 
     public void RecoverDices()
     {
-        dicesAvailable = 6;
+        DicesAvailable = 6;
     }
 
     public void ResetTaskPassed()
@@ -73,36 +70,38 @@ public class GameData
 
     public void ResetLocationsPassed()
     {
-        for (int i = 0; i < locationsPassed.Length; i++)
+        for (int i = 0; i < LocationsStatus.Length; i++)
         {
-            locationsPassed[i] = false;
+            LocationsStatus[i] = false;
         }
     }
 
     public void SetLocationPassed(int index)
     {
-        locationsPassed[index] = true;
+        LocationsStatus[index] = true;
     }
 
     public bool IsLocationCompleted(int index)
     {
-        return locationsPassed[index];
+        return LocationsStatus[index];
     }
 
-    public int LocationsPassed()
+    public int LocationsCompleted()
     {
         int passed = 0;
-        for (int i = 0; i < locationsPassed.Length; i++)
+        for (int i = 0; i < LocationsStatus.Length; i++)
         {
-            if (locationsPassed[i]) passed++;
+            if (LocationsStatus[i])
+                passed++;
         }
         return passed;
     }
 
     public void ChangeTurn()
     {
-        if (playerTurn == 1) playerTurn = 0;
-        else playerTurn = 1;
+        if (PlayerTurn == 1)
+            PlayerTurn = 0;
+        else PlayerTurn = 1;
     }
 
 }
