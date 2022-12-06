@@ -13,12 +13,6 @@ public class TasksImages
 
 public class LocationState : State
 {
-    public const string SuccessHeader = "Enhorabuena";
-    public const string SuccessText = "Has encontrado todas las pistas del lugar.";
-    
-    public const string FailureHeader = "Fracasaste";
-    public const string FailureText = "No has encontrado informacion relevante.";
-
     private LocationScriptable _location = null;
     private int _selectedTaskIndex = 0;
     private bool[] _completedTasks = null;
@@ -225,7 +219,7 @@ public class LocationState : State
 
         if (IsLocationFailed() && GameData.Instance.PlayerTurn == 1)
         {
-            await ShowEndLocationWindow(FailureHeader, FailureText);
+            await ShowEndLocationWindow(TextKeys.HeaderFailure, TextKeys.LocationFailed);
             return;
         }
 
@@ -317,13 +311,13 @@ public class LocationState : State
         if (_completedTaskNumber == 3)
         {
             GameData.Instance.SetLocationPassed(_location.Number);
-            await ShowEndLocationWindow(SuccessHeader, SuccessText);
+            await ShowEndLocationWindow(TextKeys.HeaderCongratulations, TextKeys.LocationSuccess);
         }
         else
         {
             if (IsLocationFailed() && _rerolled)
             {
-                await ShowEndLocationWindow(FailureHeader, FailureText);
+                await ShowEndLocationWindow(TextKeys.HeaderFailure, TextKeys.LocationFailed);
                 return;
             }
             SelectTask();

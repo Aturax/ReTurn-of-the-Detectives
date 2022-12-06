@@ -2830,6 +2830,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainMenuState: {fileID: 879943841}
   CityState: {fileID: 600724102}
+  LocationState: {fileID: 785623739}
+  GameOverState: {fileID: 1285620437}
   _fader:
     _audioSource: {fileID: 2036607543}
     _imageFader: {fileID: 2036607544}
@@ -6187,20 +6189,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed965a18be42d24792446c4791433f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _paperLocationImage: {fileID: 0}
-  _paperLocationLabel: {fileID: 0}
-  _tasksImages: []
-  _diceImages: []
-  _dices: []
-  _investigatorPortrait: {fileID: 0}
-  _investigateButton: {fileID: 0}
-  _completedTasksSeal: []
-  _taskIndicatorButtons: []
-  _rerollButton: {fileID: 0}
-  _locationEndedWindow: {fileID: 0}
-  _locationEndedHeader: {fileID: 0}
-  _locationEndedText: {fileID: 0}
-  continueButton: {fileID: 0}
+  _paperLocationImage: {fileID: 464475871}
+  _paperLocationLabel: {fileID: 157422552}
+  _tasksImages:
+  - TaskImages:
+    - {fileID: 674876739}
+    - {fileID: 1396130186}
+    - {fileID: 1619419884}
+  - TaskImages:
+    - {fileID: 602604494}
+    - {fileID: 1973998945}
+    - {fileID: 1424845798}
+  - TaskImages:
+    - {fileID: 104465917}
+    - {fileID: 1055125736}
+    - {fileID: 2091541777}
+  _diceImages:
+  - {fileID: -799919753, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  - {fileID: -1403209318, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  - {fileID: 859931341, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  - {fileID: -2121869610, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  - {fileID: 52504487, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  _dices:
+  - {fileID: 127754564}
+  - {fileID: 824197558}
+  - {fileID: 2132511633}
+  - {fileID: 1997631823}
+  - {fileID: 296023551}
+  - {fileID: 2029441136}
+  _investigatorPortrait: {fileID: 1478387906}
+  _investigateButton: {fileID: 183652943}
+  _completedTasksSeal:
+  - {fileID: 1219617392}
+  - {fileID: 339261182}
+  - {fileID: 154582320}
+  _taskIndicatorButtons:
+  - {fileID: 306828174}
+  - {fileID: 2040304117}
+  - {fileID: 1193023444}
+  _rerollButton: {fileID: 1201700684}
+  _locationEndedWindow: {fileID: 1385089444}
+  _locationEndedHeader: {fileID: 28378829}
+  _locationEndedText: {fileID: 140458334}
+  _continueButton: {fileID: 829991072}
 --- !u!1 &786935217
 GameObject:
   m_ObjectHideFlags: 0
@@ -9731,10 +9762,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ebb2a961e547243a4846c5138b6501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverImage: {fileID: 0}
-  winSprite: {fileID: 0}
-  looseSprite: {fileID: 0}
-  continueButton: {fileID: 0}
+  _gameOverImage: {fileID: 1285620433}
+  _winSprite: {fileID: 21300000, guid: 7990ca03535e6494c9e5203f6462a2ea, type: 3}
+  _looseSprite: {fileID: 21300000, guid: fc311385942d09f4a8ccc21fe3585943, type: 3}
+  _continueButton: {fileID: 1285620436}
 --- !u!1 &1296171123
 GameObject:
   m_ObjectHideFlags: 0

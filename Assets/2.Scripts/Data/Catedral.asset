@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ce2d2081b4a514484f6b5856f047ac, type: 3}
+  m_Name: Catedral
+  m_EditorClassIdentifier: 
+  InvestigatorPortrait: []
+  Name: Catedral
+  Number: 1
+  DiceTasks:
+  - Task: 010000000100000002000000
+  - Task: 0300000003000000
+  - Task: 010000000100000003000000
+  Sprite: {fileID: 21300000, guid: 4b8ebe0e06a05ce46aa84309c05f4262, type: 3}
+  Clip: {fileID: 8300000, guid: b54181a0a29f35e43b7c984d7c9028df, type: 3}

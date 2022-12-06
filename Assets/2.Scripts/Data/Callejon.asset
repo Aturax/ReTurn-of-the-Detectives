@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ce2d2081b4a514484f6b5856f047ac, type: 3}
+  m_Name: Callejon
+  m_EditorClassIdentifier: 
+  InvestigatorPortrait: []
+  Name: Callejon
+  Number: 0
+  DiceTasks:
+  - Task: 0300000002000000
+  - Task: 010000000100000001000000
+  - Task: 0100000004000000
+  Sprite: {fileID: 21300000, guid: 79e23536e9aaf4140982c184560902e1, type: 3}
+  Clip: {fileID: 8300000, guid: 3766dd4a5e3b7bf409e15ba28b4b3a2d, type: 3}

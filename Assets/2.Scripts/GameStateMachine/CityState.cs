@@ -5,12 +5,6 @@ using TMPro;
 
 public class CityState : State
 {
-    private const string WinnerHeader = "Enhorabuena";
-    private const string WinnerBody = "El asesino ha sido atrapado";
-
-    private const string LooserHeader = "Enhorabuena";
-    private const string LooserBody = "El asesino ha sido atrapado";
-
     [SerializeField] private AudioClip _cityClip = null;
 
     [SerializeField] private TMP_Text _calendar = null;
@@ -86,12 +80,12 @@ public class CityState : State
         if (GameData.Instance.DaysLeft < 0)
         {
             _calendar.text = "0";
-            ShowGameOverWindow(LooserHeader, LooserBody, false);
+            ShowGameOverWindow(TextKeys.HeaderFailure, TextKeys.CaseFailed, false);
         }
 
         if (GameData.Instance.LocationsCompleted() == 3)
         {
-            ShowGameOverWindow(WinnerHeader, WinnerBody, true);
+            ShowGameOverWindow(TextKeys.HeaderCongratulations, TextKeys.CaseResolved, true);
         }
     }
 
