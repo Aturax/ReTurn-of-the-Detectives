@@ -3,7 +3,7 @@ public class GameData
     private static GameData _instance = null;
     
     public int DaysLeft { get; private set; } = 10;    
-    public int PlayerTurn { get; private set; } = 0;
+    public int PlayerTurn { get; private set; } = 1;
     public int DicesAvailable { get; private set; } = 6;
     public int DonkeyDices = 0;
     public bool[] TaskPassed { get; private set; } = {false, false, false};
@@ -101,7 +101,8 @@ public class GameData
     {
         if (PlayerTurn == 1)
             PlayerTurn = 0;
-        else PlayerTurn = 1;
+        else 
+            PlayerTurn = 1;
     }
 
 }

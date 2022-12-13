@@ -40,9 +40,4 @@ public static class DiceRoll
         }
         return true;
     }
-
-    public static void FadeDice(Image diceImage, float alpha, float time)
-    {
-        diceImage.CrossFadeAlpha(alpha, time, false);
-    }
 }

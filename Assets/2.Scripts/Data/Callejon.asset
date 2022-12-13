@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ce2d2081b4a514484f6b5856f047ac, type: 3}
   m_Name: Callejon
   m_EditorClassIdentifier: 
-  InvestigatorPortrait: []
+  InvestigatorPortrait:
+  - {fileID: 1030307484, guid: 5c46a54922b822f428a4ccde187d4bc7, type: 3}
+  - {fileID: -1701741275, guid: 5c46a54922b822f428a4ccde187d4bc7, type: 3}
   Name: Callejon
   Number: 0
   DiceTasks:

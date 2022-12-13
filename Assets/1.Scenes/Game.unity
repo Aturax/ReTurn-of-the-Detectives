@@ -1196,7 +1196,7 @@ GameObject:
   - component: {fileID: 157422553}
   - component: {fileID: 157422552}
   m_Layer: 5
-  m_Name: Location Label
+  m_Name: Location Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1215,7 +1215,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1795198881}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1608,7 +1608,7 @@ RectTransform:
   m_Children:
   - {fileID: 586659344}
   m_Father: {fileID: 1795198881}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3484,7 +3484,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1795198881}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4564,7 +4564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cityClip: {fileID: 8300000, guid: 75d7ea66d2f42594e9fbbe333bc7ab08, type: 3}
   _calendar: {fileID: 1221622978}
-  _askForTravel: {fileID: 1577545727}
+  _travelWindow: {fileID: 1577545732}
   _locationsPanelButtons:
   - {fileID: 228295450}
   - {fileID: 1584331801}
@@ -4573,12 +4573,10 @@ MonoBehaviour:
   - {fileID: 1043011859}
   - {fileID: 471538326}
   - {fileID: 674185941}
-  _travel: {fileID: 1919700333}
   _locations:
   - {fileID: 11400000, guid: 256cb3962da9762479d25ac9ca669ccb, type: 2}
   - {fileID: 11400000, guid: 9b3b043edb4361c4e859635ea4ba330e, type: 2}
   - {fileID: 11400000, guid: afae29a9d4521f14b97788616f51e0b6, type: 2}
-  _destination: {fileID: 86840831}
   _characterFrames:
   - {fileID: 540326308}
   - {fileID: 1296171123}
@@ -4586,10 +4584,7 @@ MonoBehaviour:
   - {fileID: 902553418}
   - {fileID: 161127275}
   - {fileID: 870900420}
-  _gameOverWindow: {fileID: 658766329}
-  _gameOverHeader: {fileID: 695880015}
-  _gameOverBody: {fileID: 1862208043}
-  _continueButton: {fileID: 786935219}
+  _gameOverWindow: {fileID: 658766334}
 --- !u!1 &602604492
 GameObject:
   m_ObjectHideFlags: 0
@@ -4835,6 +4830,7 @@ GameObject:
   - component: {fileID: 658766333}
   - component: {fileID: 658766332}
   - component: {fileID: 658766331}
+  - component: {fileID: 658766334}
   m_Layer: 5
   m_Name: GameOver Window
   m_TagString: Untagged
@@ -4924,6 +4920,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &658766334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658766329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dedc129379565468302f7d70ed8c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headerText: {fileID: 695880015}
+  _bodyText: {fileID: 1862208043}
+  _acceptButton: {fileID: 786935219}
+  _cancelButton: {fileID: 0}
 --- !u!1 &666188072
 GameObject:
   m_ObjectHideFlags: 0
@@ -6189,8 +6201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed965a18be42d24792446c4791433f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _paperLocationImage: {fileID: 464475871}
-  _paperLocationLabel: {fileID: 157422552}
+  _newspaper: {fileID: 1795198884}
+  _diceButtons: {fileID: 2080031702}
   _tasksImages:
   - TaskImages:
     - {fileID: 674876739}
@@ -6204,20 +6216,6 @@ MonoBehaviour:
     - {fileID: 104465917}
     - {fileID: 1055125736}
     - {fileID: 2091541777}
-  _diceImages:
-  - {fileID: -799919753, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
-  - {fileID: -1403209318, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
-  - {fileID: 859931341, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
-  - {fileID: -2121869610, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
-  - {fileID: 52504487, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
-  _dices:
-  - {fileID: 127754564}
-  - {fileID: 824197558}
-  - {fileID: 2132511633}
-  - {fileID: 1997631823}
-  - {fileID: 296023551}
-  - {fileID: 2029441136}
-  _investigatorPortrait: {fileID: 1478387906}
   _investigateButton: {fileID: 183652943}
   _completedTasksSeal:
   - {fileID: 1219617392}
@@ -6228,10 +6226,7 @@ MonoBehaviour:
   - {fileID: 2040304117}
   - {fileID: 1193023444}
   _rerollButton: {fileID: 1201700684}
-  _locationEndedWindow: {fileID: 1385089444}
-  _locationEndedHeader: {fileID: 28378829}
-  _locationEndedText: {fileID: 140458334}
-  _continueButton: {fileID: 829991072}
+  _locationEndedWindow: {fileID: 1385089449}
 --- !u!1 &786935217
 GameObject:
   m_ObjectHideFlags: 0
@@ -8811,7 +8806,7 @@ GameObject:
   - component: {fileID: 1201700685}
   - component: {fileID: 1201700684}
   m_Layer: 5
-  m_Name: Reroll
+  m_Name: Reroll Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8913,7 +8908,7 @@ RectTransform:
   m_Children:
   - {fileID: 488942694}
   m_Father: {fileID: 1795198881}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9216,7 +9211,7 @@ GameObject:
   - component: {fileID: 1229745007}
   - component: {fileID: 1229745006}
   m_Layer: 5
-  m_Name: Label
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9262,7 +9257,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xBFEstas seguro de que quieres viajar alli?"
+  m_text: Estas seguro de que quieres viajar alli?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb55a932f5ece5f4eb94056a9459642c, type: 2}
   m_sharedMaterial: {fileID: 1727337955723448758, guid: cb55a932f5ece5f4eb94056a9459642c, type: 2}
@@ -10273,6 +10268,7 @@ GameObject:
   - component: {fileID: 1385089448}
   - component: {fileID: 1385089447}
   - component: {fileID: 1385089446}
+  - component: {fileID: 1385089449}
   m_Layer: 5
   m_Name: Location Ended Window
   m_TagString: Untagged
@@ -10362,6 +10358,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1385089449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385089444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dedc129379565468302f7d70ed8c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headerText: {fileID: 28378829}
+  _bodyText: {fileID: 140458334}
+  _acceptButton: {fileID: 829991072}
+  _cancelButton: {fileID: 0}
 --- !u!1 &1386971168
 GameObject:
   m_ObjectHideFlags: 0
@@ -10979,7 +10991,7 @@ GameObject:
   - component: {fileID: 1478387907}
   - component: {fileID: 1478387906}
   m_Layer: 5
-  m_Name: Portrait
+  m_Name: Investigator Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10998,7 +11010,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1795198881}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11548,6 +11560,7 @@ GameObject:
   - component: {fileID: 1577545731}
   - component: {fileID: 1577545730}
   - component: {fileID: 1577545729}
+  - component: {fileID: 1577545732}
   m_Layer: 5
   m_Name: Travel Window
   m_TagString: Untagged
@@ -11637,6 +11650,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1577545732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577545727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dedc129379565468302f7d70ed8c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headerText: {fileID: 86840831}
+  _bodyText: {fileID: 1229745006}
+  _acceptButton: {fileID: 1919700333}
+  _cancelButton: {fileID: 1717557937}
 --- !u!1 &1580325895
 GameObject:
   m_ObjectHideFlags: 0
@@ -12770,6 +12799,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1795198881}
   - component: {fileID: 1795198883}
+  - component: {fileID: 1795198884}
   m_Layer: 5
   m_Name: Newspaper
   m_TagString: Untagged
@@ -12789,12 +12819,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 464475870}
+  - {fileID: 157422551}
   - {fileID: 1478387905}
   - {fileID: 1201700687}
   - {fileID: 183652942}
   - {fileID: 2080031698}
-  - {fileID: 464475870}
-  - {fileID: 157422551}
   - {fileID: 724854483}
   - {fileID: 1602977973}
   - {fileID: 2076244879}
@@ -12814,6 +12844,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795198880}
   m_CullTransparentMesh: 1
+--- !u!114 &1795198884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795198880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79620ca6cc75aec4eb1b6c629c0ad7c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _locationText: {fileID: 157422552}
+  _locationImage: {fileID: 464475871}
+  _investigatorPortrait: {fileID: 1478387906}
 --- !u!1 &1816197008
 GameObject:
   m_ObjectHideFlags: 0
@@ -14801,8 +14846,9 @@ GameObject:
   - component: {fileID: 2080031701}
   - component: {fileID: 2080031700}
   - component: {fileID: 2080031699}
+  - component: {fileID: 2080031702}
   m_Layer: 5
-  m_Name: Dice Roll
+  m_Name: Dice Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14827,7 +14873,7 @@ RectTransform:
   - {fileID: 296023548}
   - {fileID: 2029441133}
   m_Father: {fileID: 1795198881}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14896,6 +14942,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080031697}
   m_CullTransparentMesh: 1
+--- !u!114 &2080031702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080031697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdba690986e37844bcbc7809429a2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _diceFaces:
+  - {fileID: -799919753, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  - {fileID: -1403209318, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  - {fileID: 859931341, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  - {fileID: -2121869610, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  - {fileID: 52504487, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  _diceButtons:
+  - {fileID: 127754564}
+  - {fileID: 824197558}
+  - {fileID: 2132511633}
+  - {fileID: 1997631823}
+  - {fileID: 296023551}
+  - {fileID: 2029441136}
 --- !u!1 &2091541775
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using UnityEditor;
 
 [Serializable]
 public class TasksImages
@@ -17,32 +17,34 @@ public class LocationState : State
     private int _selectedTaskIndex = 0;
     private bool[] _completedTasks = null;
     private int _completedTaskNumber = 0;
-    private bool _taskSelected = false;
-    private bool[] _dicesReroll = null;
+    private bool _taskSelected = false;    
     private bool _rerolling = false;
-    private bool _rerolled = false;    
+    private bool _rerolled = false;
 
-    [SerializeField] private Image _paperLocationImage = null;
-    [SerializeField] private TMP_Text _paperLocationLabel = null;
+    [SerializeField] private Newspaper _newspaper = null;
+    [SerializeField] private DiceButtons _diceButtons = null;
     [SerializeField] private TasksImages[] _tasksImages = null;
-    [SerializeField] private List<Sprite> _diceImages = null;
-    [SerializeField] private Button[] _dices = null;
-    [SerializeField] private Image _investigatorPortrait = null;
     [SerializeField] private Button _investigateButton = null;
     [SerializeField] private GameObject[] _completedTasksSeal = null;
     [SerializeField] private Button[] _taskIndicatorButtons = null;
     [SerializeField] private Button _rerollButton = null;
 
     [Header("Location Window")]
-    [SerializeField] private GameObject _locationEndedWindow = null;
-    [SerializeField] private TMP_Text _locationEndedHeader = null;
-    [SerializeField] private TMP_Text _locationEndedText = null;
-    [SerializeField] private Button _continueButton = null;
-    
+    [SerializeField] private DialogPanelWindow _locationEndedWindow = null;
+
+    private void Awake()
+    {
+        _locationEndedWindow.AcceptButtonClicked += LocationEnded;
+    }
+
+    private void OnDestroy()
+    {
+        _locationEndedWindow.AcceptButtonClicked -= LocationEnded;
+    }
+
     public override void PreLoadState()
     {
-        _investigateButton.onClick.AddListener(() => { RollDices(); });
-        _continueButton.onClick.AddListener(() => { LocationEnded(); });
+        _investigateButton.onClick.AddListener(() => { Investigate(); });        
         _rerollButton.onClick.AddListener(() => { ActiveReroll(); });
 
         for (int i = 0; i < _taskIndicatorButtons.Length; i++)
@@ -50,24 +52,15 @@ public class LocationState : State
             int number = i;
             _taskIndicatorButtons[i].onClick.AddListener(() => { SelectTask(number); });
         }
-
-        for (int i = 0; i < _dices.Length; i++)
-        {
-            int index = i;
-            _dices[index].onClick.AddListener(() => { SelectDiceToReroll(index); });
-        }
     }
 
     public async override void Enter()
     {
         _stateMachine.PlaySound(_location.Clip);
         gameObject.SetActive(true);
-        
-        _dicesReroll = new bool[_dices.Length];
-        _investigatorPortrait.sprite = _location.InvestigatorPortrait[GameData.Instance.PlayerTurn];
-        
-        ResetButtons();
-        ResetDices();
+        GameData.Instance.RecoverDices();
+        LoadNewspaperData();
+        ResetButtons();        
         LoadTasks();
         ResetIndicators();
         SelectTask();
@@ -78,7 +71,7 @@ public class LocationState : State
     public override void Exit()
     {
         gameObject.SetActive(false);
-        _locationEndedWindow.SetActive(false);
+        _locationEndedWindow.ShowWindow(false);
     }
 
     private void ResetButtons()
@@ -89,19 +82,6 @@ public class LocationState : State
 
         _rerolling = false;
         _rerolled = GameData.Instance.PlayerTurn == 0;
-    }
-
-    private void ResetDices()
-    {
-        int index = 0;
-
-        foreach (Dice diceValue in Enum.GetValues(typeof(Dice)))
-        {
-            _dices[index].image.sprite = _diceImages[(int)diceValue];
-            _dices[index].gameObject.SetActive(true);            
-            index++;
-        }
-        GameData.Instance.RecoverDices();
     }
 
     private void ResetIndicators()
@@ -193,7 +173,7 @@ public class LocationState : State
             if (task.Length > i)
             {
                 images[i].gameObject.SetActive(true);
-                images[i].sprite = _diceImages[(int)task[i]];
+                images[i].sprite = _diceButtons.GetDiceFace((int)task[i]);
             }
             else
             {
@@ -202,79 +182,45 @@ public class LocationState : State
         }
     }
 
-    private void RollDices()
-    {
-        if (_rerolling)
-        {
-            RerollDices();
-            return;
-        }
-        Investigate();
-    }
-
     private async void Investigate()
     {
-        if (!_taskSelected)
+        if (_diceButtons.GetNumberOfDicesToRoll() == 0 && !_taskSelected)
             return;
 
-        if (IsLocationFailed() && GameData.Instance.PlayerTurn == 1)
+        if (IsLocationFailed() && GameData.Instance.PlayerTurn == 1 && !_rerolling)
         {
             await ShowEndLocationWindow(TextKeys.HeaderFailure, TextKeys.LocationFailed);
             return;
         }
 
-        await HideDiceButtons();
-
-        List<Dice> roll = DiceRoll.GetDiceRoll(GameData.Instance.DicesAvailable);
-
-        for (int i = 0; i < _dices.Length; i++)
-        {
-            if (i < GameData.Instance.DicesAvailable)
-            {
-                _dices[i].image.sprite = _diceImages[(int)roll[i]];
-                await ShowDiceButton(i);                
-            }
-            else
-            {
-                DiceRoll.FadeDice(_dices[i].image, 0.0f, 0.0f);
-            }
-        }
-
-        CheckDiceTask(_location.DiceTasks[_selectedTaskIndex].Task, roll);
-    }
-
-    private async void RerollDices()
-    {
-        int dicesSelected = 0;
-
-        for (int i = 0; i < _dicesReroll.Length; i++)
-        {
-            if (_dicesReroll[i])
-                dicesSelected++;
-        }
-
-        if (dicesSelected == 0) 
-            return;
-
-        _rerolled = true;
         _investigateButton.enabled = false;
         _rerollButton.enabled = false;
-        await FadeRerollButtons(0.0f);
+        await _diceButtons.FadeDiceButtons(0.0f);
 
-        GameData.Instance.RecoverDice();
+        if (_rerolling)
+        {
+            _rerolled = true;
+            GameData.Instance.RecoverDice();
+        }
 
         List<Dice> roll = DiceRoll.GetDiceRoll(GameData.Instance.DicesAvailable);
 
-        for (int i =0 ; i < GameData.Instance.DicesAvailable; i++)
+        for (int i = 0; i < _diceButtons.GetDiceButtonsLength(); i++)
         {
-            if (!_dicesReroll[i])
-                roll[i] = (Dice)_diceImages.IndexOf(_dices[i].image.sprite);
-            
-            _dices[i].image.sprite = _diceImages[(int)roll[i]];            
+            if (i > GameData.Instance.DicesAvailable - 1)
+            {
+                _diceButtons.FadeDice(i, 0.0f, 0.0f);
+                _diceButtons.SelectDiceToRoll(i, false);
+                continue;
+            }
+
+            if (_diceButtons.IsDiceSelected(i))
+                _diceButtons.SetDiceImage(i, (int)roll[i]);
+            else
+                roll[i] = _diceButtons.GetDiceOfButton(i);            
         }
 
-        await FadeRerollButtons(1.0f);        
-
+        await _diceButtons.FadeDiceButtons(1.0f);
         CheckDiceTask(_location.DiceTasks[_selectedTaskIndex].Task, roll);
     }
 
@@ -292,6 +238,7 @@ public class LocationState : State
             _completedTasks[_selectedTaskIndex] = true;
             _completedTaskNumber++;            
             _taskSelected = false;
+            _diceButtons.DisableDiceButtons();
             if (GameData.Instance.PlayerTurn == 1)
             {
                 _selectedTaskIndex++;
@@ -328,33 +275,26 @@ public class LocationState : State
     {
         _rerollButton.gameObject.SetActive(status && !_rerolled);
         _rerolling = false;
-
-        if (status)
-        {
-            for (int i = 0; i < _dices.Length; i++)
-            {
-                _dices[i].enabled = status;
-                _dicesReroll[i] = false;
-            }
-        }
     }
 
     private void ActiveReroll()
     {
-        _rerolling = true;
-    }
+        _rerolling = !_rerolling;
 
-    private void SelectDiceToReroll(int index)
-    {
         if (_rerolling)
-            _dicesReroll[index] = true;        
+            _diceButtons.EnableDiceButtons();
+        else
+            _diceButtons.DisableDiceButtons();
     }
 
-    public void GetLocation(LocationScriptable location)
+    public void SetLocation(LocationScriptable location)
     {
         _location = location;
-        _paperLocationImage.sprite = location.Sprite;
-        _paperLocationLabel.text = location.Name;
+    }
+
+    public void LoadNewspaperData()
+    {
+        _newspaper.LoadData(_location.name, _location.Sprite, _location.InvestigatorPortrait[GameData.Instance.PlayerTurn]);        
     }
 
     private bool IsLocationFailed()
@@ -369,51 +309,13 @@ public class LocationState : State
 
         await Task.Delay(1000);
 
-        _locationEndedWindow.SetActive(true);
-        _locationEndedHeader.text = header;
-        _locationEndedText.text = text;
+        _locationEndedWindow.ShowWindow(true);
+        _locationEndedWindow.FillTextData(header, text);
     }
 
     private async void LocationEnded()
     {
         await _stateMachine.Fade(1.0f, 1.0f); // TODO: Add sound
         _stateMachine.ChangeState(_stateMachine.CityState);
-    }
-
-    private async Task HideDiceButtons()
-    {
-        _investigateButton.enabled = false;
-        _rerollButton.enabled = false;
-
-        for (int i = 0; i < _dices.Length; i++)
-        {
-            DiceRoll.FadeDice(_dices[i].image, 0.0f, 0.3f);
-            await Task.Delay(150);
-        }
-
-        await Task.Delay(500);
-    }
-
-    private async Task ShowDiceButton(int index)
-    {
-        _dices[index].gameObject.SetActive(true);
-        DiceRoll.FadeDice(_dices[index].image, 1.0f, 0.3f);
-        await Task.Delay(500);
-    }
-
-    private async Task FadeRerollButtons(float alpha)
-    {
-        int delay = (alpha == 0.0f) ? 150 : 500;
-
-        for (int i = 0; i < _dices.Length; i++)
-        {
-            if (_dicesReroll[i])
-            {
-                DiceRoll.FadeDice(_dices[i].image, alpha, 0.3f);
-                await Task.Delay(delay);
-            }
-        }
-
-        await Task.Delay(500);
     }
 }
