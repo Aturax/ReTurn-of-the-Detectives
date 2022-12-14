@@ -6,24 +6,28 @@ using UnityEngine.UI;
 
 public class DiceButtons : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> _diceFaces = null;
+    [SerializeField] private DiceScriptable _dice = null;
     [SerializeField] private Button[] _diceButtons = null;
     private bool[] _dicesSelected = null;
 
     private void Awake()
     {
         _dicesSelected = new bool[_diceButtons.Length];
-        
-        ResetDices();        
-        DisableDiceButtons();        
 
         for (int i = 0; i < _diceButtons.Length; i++)
         {
             int index = i;
-            _dicesSelected[i] = true;
             _diceButtons[index].onClick.AddListener(() => { SelectDiceToRoll(index); });
         }
-    }    
+    }
+
+    private void OnDestroy()
+    {
+        for (int i = 0; i < _diceButtons.Length; i++)
+        {
+            _diceButtons[i].onClick.RemoveAllListeners();
+        }
+    }
 
     public void ResetDices()
     {
@@ -31,14 +35,16 @@ public class DiceButtons : MonoBehaviour
 
         foreach (Dice diceValue in Enum.GetValues(typeof(Dice)))
         {
-            _diceButtons[index].image.sprite = _diceFaces[(int)diceValue];
+            _diceButtons[index].image.sprite = _dice.Faces[(int)diceValue];
             _diceButtons[index].gameObject.SetActive(true);
+            _dicesSelected[index] = true;
             index++;
         }
         GameData.Instance.RecoverDices();
+        DisableButtons();
     }
 
-    public void DisableDiceButtons()
+    public void DisableButtons()
     {
         foreach(Button button in _diceButtons)
         {
@@ -53,7 +59,7 @@ public class DiceButtons : MonoBehaviour
         }
     }
 
-    public void EnableDiceButtons()
+    public void EnableButtons()
     {
         for(int i = 0; i < _diceButtons.Length; i++)
         {
@@ -63,62 +69,25 @@ public class DiceButtons : MonoBehaviour
         }
     }
 
-    private void SelectDiceToRoll(int diceIndex)
+    public void FillWithRoll(List<Dice> roll)
     {
-        _dicesSelected[diceIndex] = !_dicesSelected[diceIndex];
-    }
-
-    public void SelectDiceToRoll(int diceIndex, bool status)
-    {
-        _dicesSelected[diceIndex] = status;
-    }
-
-    public int GetNumberOfDicesToRoll()
-    {
-        int dices = 0;
-
-        for (int i = 0; i < _dicesSelected.Length; i++)
+        for (int i = 0; i < _diceButtons.Length; i++)
         {
-            if (_dicesSelected[i])
-                dices++;
+            if (i > GameData.Instance.DicesAvailable - 1)
+            {
+                FadeDice(i, 0.0f, 0.0f);
+                SelectDiceToRoll(i, false);
+                continue;
+            }
+
+            if (IsDiceSelected(i))
+                SetDiceImage(i, (int)roll[i]);
+            else
+                roll[i] = GetSpriteOnButton(i);
         }
-
-        return dices;
     }
 
-    public bool IsDiceSelected(int diceIndex)
-    {
-        return _dicesSelected[diceIndex];
-    }
-
-    public void SetDiceImage(int diceIndex, int faceNumber)
-    {
-        _diceButtons[diceIndex].image.sprite = _diceFaces[faceNumber];
-    }
-
-    public Sprite GetDiceFace(int faceNumber)
-    {
-        return _diceFaces[faceNumber];
-    }
-
-    public Dice GetDiceOfButton(int diceIndex)
-    {
-        return (Dice)_diceFaces.IndexOf(_diceButtons[diceIndex].image.sprite);
-    }
-
-    public int GetDiceButtonsLength()
-    {
-        return _diceButtons.Length;
-    }
-
-    public async Task ShowDiceButton(int index)
-    {
-        _diceButtons[index].gameObject.SetActive(true);
-        FadeDice(index, 1.0f, 0.3f);
-        await Task.Delay(500);
-    }
-
-    public async Task FadeDiceButtons(float alpha)
+    public async Task FadeButtons(float alpha)
     {
         int delay = (alpha == 0.0f) ? 150 : 500;
 
@@ -133,8 +102,45 @@ public class DiceButtons : MonoBehaviour
 
         await Task.Delay(500);
     }
+    public int GetNumberOfDicesToRoll()
+    {
+        int dices = 0;
 
-    public void FadeDice(int diceIndex, float alpha, float time)
+        for (int i = 0; i < _dicesSelected.Length; i++)
+        {
+            if (_dicesSelected[i])
+                dices++;
+        }
+
+        return dices;
+    }
+
+    private void SelectDiceToRoll(int diceIndex)
+    {
+        _dicesSelected[diceIndex] = !_dicesSelected[diceIndex];
+    }
+
+    private void SelectDiceToRoll(int diceIndex, bool status)
+    {
+        _dicesSelected[diceIndex] = status;
+    }
+
+    private bool IsDiceSelected(int diceIndex)
+    {
+        return _dicesSelected[diceIndex];
+    }
+
+    private void SetDiceImage(int diceIndex, int faceNumber)
+    {
+        _diceButtons[diceIndex].image.sprite = _dice.Faces[faceNumber];
+    }
+
+    private Dice GetSpriteOnButton(int diceIndex)
+    {
+        return (Dice)_dice.Faces.IndexOf(_diceButtons[diceIndex].image.sprite);
+    }
+
+    private void FadeDice(int diceIndex, float alpha, float time)
     {
         _diceButtons[diceIndex].image.CrossFadeAlpha(alpha, time, false);
     }

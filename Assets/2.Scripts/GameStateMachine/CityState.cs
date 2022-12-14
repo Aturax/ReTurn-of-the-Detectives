@@ -23,21 +23,24 @@ public class CityState : State
     {
         _gameOverWindow.AcceptButtonClicked += EndGame;
         _travelWindow.AcceptButtonClicked += TravelTo;
+
+        for (int i = 0; i < _locationsPanelButtons.Length; i++)
+        {
+            int index = i;
+            _locationsPanelButtons[i].onClick.AddListener(() => { AskToTravel(index); });
+            _locationsNumberButtons[i].onClick.AddListener(() => { AskToTravel(index); });
+        }
     }
 
     private void OnDestroy()
     {
         _gameOverWindow.AcceptButtonClicked -= EndGame;
         _travelWindow.AcceptButtonClicked -= TravelTo;
-    }
 
-    public override void PreLoadState()
-    {
         for (int i = 0; i < _locationsPanelButtons.Length; i++)
         {
-            int index = i;
-            _locationsPanelButtons[i].onClick.AddListener(() => { AskToTravel(index); });
-            _locationsNumberButtons[i].onClick.AddListener(() => { AskToTravel(index); });
+            _locationsPanelButtons[i].onClick.RemoveAllListeners();
+            _locationsNumberButtons[i].onClick.RemoveAllListeners();
         }
     }
 

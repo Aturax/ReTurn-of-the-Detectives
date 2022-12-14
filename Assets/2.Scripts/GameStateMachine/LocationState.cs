@@ -14,19 +14,13 @@ public class TasksImages
 public class LocationState : State
 {
     private LocationScriptable _location = null;
-    private int _selectedTaskIndex = 0;
-    private bool[] _completedTasks = null;
-    private int _completedTaskNumber = 0;
-    private bool _taskSelected = false;    
     private bool _rerolling = false;
     private bool _rerolled = false;
 
     [SerializeField] private Newspaper _newspaper = null;
+    [SerializeField] private LocationTasks _locationTasks = null;
     [SerializeField] private DiceButtons _diceButtons = null;
-    [SerializeField] private TasksImages[] _tasksImages = null;
     [SerializeField] private Button _investigateButton = null;
-    [SerializeField] private GameObject[] _completedTasksSeal = null;
-    [SerializeField] private Button[] _taskIndicatorButtons = null;
     [SerializeField] private Button _rerollButton = null;
 
     [Header("Location Window")]
@@ -35,34 +29,26 @@ public class LocationState : State
     private void Awake()
     {
         _locationEndedWindow.AcceptButtonClicked += LocationEnded;
+        _investigateButton.onClick.AddListener(() => { Investigate(); });
+        _rerollButton.onClick.AddListener(() => { ActiveReroll(); });
     }
 
     private void OnDestroy()
     {
         _locationEndedWindow.AcceptButtonClicked -= LocationEnded;
-    }
-
-    public override void PreLoadState()
-    {
-        _investigateButton.onClick.AddListener(() => { Investigate(); });        
-        _rerollButton.onClick.AddListener(() => { ActiveReroll(); });
-
-        for (int i = 0; i < _taskIndicatorButtons.Length; i++)
-        {
-            int number = i;
-            _taskIndicatorButtons[i].onClick.AddListener(() => { SelectTask(number); });
-        }
+        _investigateButton.onClick.RemoveAllListeners();
+        _rerollButton.onClick.RemoveAllListeners();
     }
 
     public async override void Enter()
     {
         _stateMachine.PlaySound(_location.Clip);
         gameObject.SetActive(true);
-        GameData.Instance.RecoverDices();
-        LoadNewspaperData();
-        ResetButtons();        
-        LoadTasks();
-        ResetIndicators();
+
+        _newspaper.LoadData(_location.name, _location.Sprite, _location.InvestigatorPortrait[GameData.Instance.PlayerTurn]);
+        _locationTasks.LoadTasks(_location);
+        _locationTasks.ResetIndicators();
+        ResetButtons();
         SelectTask();
 
         await _stateMachine.Fade(0.0f, 1.0f); // TODO: Add sound
@@ -76,115 +62,38 @@ public class LocationState : State
 
     private void ResetButtons()
     {
-        _investigateButton.enabled = true;
-        _rerollButton.enabled = true;
+        EnableInvestigateRerollButtons(true);
         _rerollButton.gameObject.SetActive(false);
-
+        _diceButtons.ResetDices();
         _rerolling = false;
-        _rerolled = GameData.Instance.PlayerTurn == 0;
+        _rerolled = GameData.Instance.PlayerTurn == 0;        
     }
 
-    private void ResetIndicators()
+    private void EnableInvestigateRerollButtons(bool status)
     {
-        for (int i = 0; i < _completedTasksSeal.Length; i++)
-        {
-            _completedTasksSeal[i].SetActive(false);
-        }
-
-        for (int i = 0; i < _taskIndicatorButtons.Length; i++)
-        {
-            _taskIndicatorButtons[i].gameObject.SetActive(GameData.Instance.PlayerTurn == 0);
-            _taskIndicatorButtons[i].enabled = GameData.Instance.PlayerTurn == 0;
-        }
-    }
-
-    private void LoadTasks()
-    {
-        _selectedTaskIndex = 0;
-        _taskSelected = false;
-
-        _completedTasks = new bool[_taskIndicatorButtons.Length];
-        _completedTaskNumber = 0;
-
-        for (int i = 0; i < _taskIndicatorButtons.Length; i++)
-        {
-            _completedTasks[i] = false;
-        }
-
-        for (int i = 0; i < _location.DiceTasks.Length; i++)
-        {
-            ShowDiceTask(_tasksImages[i].TaskImages, _location.DiceTasks[i].Task);
-        }
+        _investigateButton.enabled = status;
+        _rerollButton.enabled = status;
     }
 
     private void SelectTask()
     {
-        if (_taskSelected) return;
+        if (_locationTasks.TaskSelected)
+            return;
 
         if (GameData.Instance.PlayerTurn == 1)
         {
-            for (int i = 0; i < _taskIndicatorButtons.Length; i++)
-            {
-                _taskIndicatorButtons[i].gameObject.SetActive(i == _selectedTaskIndex);
-            }
-
-            _taskSelected = true;
+            _locationTasks.SelectTask();            
         }
         else
         {
-            for (int i = 0; i < _taskIndicatorButtons.Length; i++)
-            {
-                _taskIndicatorButtons[i].gameObject.SetActive(!_completedTasks[i]);
-            }
-            AutoSelectLastTask();
-        }
-    }
-
-    public void SelectTask(int index)
-    {
-        for (int i = 0; i < _taskIndicatorButtons.Length; i++)
-        {
-            _taskIndicatorButtons[i].gameObject.SetActive(i == index);
-        }
-
-        _selectedTaskIndex = index;
-        _taskSelected = true;
-    }
-
-    private void AutoSelectLastTask()
-    {
-        if (_completedTaskNumber == 2)
-        {
-            for (int i = 0; i < _completedTasks.Length; i++)
-            {
-                if (!_completedTasks[i])
-                {
-                    SelectTask(i);
-                    return;
-                }                
-            }            
-        }
-    }
-
-    private void ShowDiceTask(Image[] images, Dice[] task)
-    {
-        for (int i = 0; i < images.Length; i++)
-        {
-            if (task.Length > i)
-            {
-                images[i].gameObject.SetActive(true);
-                images[i].sprite = _diceButtons.GetDiceFace((int)task[i]);
-            }
-            else
-            {
-                images[i].gameObject.SetActive(false);
-            }
+            _locationTasks.ShowNotCompletedTasksIndicators();
+            _locationTasks.SelectLastTask();
         }
     }
 
     private async void Investigate()
     {
-        if (_diceButtons.GetNumberOfDicesToRoll() == 0 && !_taskSelected)
+        if (_diceButtons.GetNumberOfDicesToRoll() == 0 || !_locationTasks.TaskSelected)
             return;
 
         if (IsLocationFailed() && GameData.Instance.PlayerTurn == 1 && !_rerolling)
@@ -193,9 +102,8 @@ public class LocationState : State
             return;
         }
 
-        _investigateButton.enabled = false;
-        _rerollButton.enabled = false;
-        await _diceButtons.FadeDiceButtons(0.0f);
+        EnableInvestigateRerollButtons(false);
+        await _diceButtons.FadeButtons(0.0f);
 
         if (_rerolling)
         {
@@ -204,60 +112,55 @@ public class LocationState : State
         }
 
         List<Dice> roll = DiceRoll.GetDiceRoll(GameData.Instance.DicesAvailable);
+        _diceButtons.FillWithRoll(roll);
 
-        for (int i = 0; i < _diceButtons.GetDiceButtonsLength(); i++)
-        {
-            if (i > GameData.Instance.DicesAvailable - 1)
-            {
-                _diceButtons.FadeDice(i, 0.0f, 0.0f);
-                _diceButtons.SelectDiceToRoll(i, false);
-                continue;
-            }
-
-            if (_diceButtons.IsDiceSelected(i))
-                _diceButtons.SetDiceImage(i, (int)roll[i]);
-            else
-                roll[i] = _diceButtons.GetDiceOfButton(i);            
-        }
-
-        await _diceButtons.FadeDiceButtons(1.0f);
-        CheckDiceTask(_location.DiceTasks[_selectedTaskIndex].Task, roll);
+        await _diceButtons.FadeButtons(1.0f);
+        CompareTaskWithRoll(_location.DiceTasks[_locationTasks.SelectedTaskIndex].Task, roll);
     }
 
-    private async void CheckDiceTask(Dice[] task, List<Dice> roll)
+    private void CompareTaskWithRoll(Dice[] task, List<Dice> roll)
     {
         bool status = DiceRoll.CheckDiceTask(task, roll);
-        _completedTasksSeal[_selectedTaskIndex].SetActive(status);
 
         if (status)
-        {
-            _completedTasksSeal[_selectedTaskIndex].SetActive(DiceRoll.CheckDiceTask(task, roll));
-            _completedTasksSeal[_selectedTaskIndex].SetActive(true);
-            GameData.Instance.SetTaskPassed(_selectedTaskIndex);
-            GameData.Instance.RecoverDices();
-            _completedTasks[_selectedTaskIndex] = true;
-            _completedTaskNumber++;            
-            _taskSelected = false;
-            _diceButtons.DisableDiceButtons();
-            if (GameData.Instance.PlayerTurn == 1)
-            {
-                _selectedTaskIndex++;
-                ShowRerollButton(false);
-            }
-        }
+            TaskSuccess();
         else
+            TaskFailed();
+
+        EnableInvestigateRerollButtons(true);
+
+        CheckLocalizationCompleted();
+    }
+
+    private void TaskSuccess()
+    {
+        _locationTasks.ActiveCompleteTaskSeal();
+        GameData.Instance.SetTaskSuccess(_locationTasks.SelectedTaskIndex);
+        GameData.Instance.RecoverDices();
+        GameData.Instance.TasksStatus[_locationTasks.SelectedTaskIndex] = true;
+        _locationTasks.TaskSelected = false;
+        _diceButtons.DisableButtons();
+
+        if (GameData.Instance.PlayerTurn == 1)
         {
-            GameData.Instance.LoseDice();
-            if (GameData.Instance.PlayerTurn == 1) 
-                ShowRerollButton(true);
+            _locationTasks.SelectedTaskIndex++;
+            ShowRerollButton(false);
         }
+    }
 
-        _investigateButton.enabled = true;
-        _rerollButton.enabled = true;
+    private void TaskFailed()
+    {
+        GameData.Instance.LoseDice();
 
-        if (_completedTaskNumber == 3)
+        if (GameData.Instance.PlayerTurn == 1)
+            ShowRerollButton(true);
+    }
+
+    private async void CheckLocalizationCompleted()
+    {
+        if (GameData.Instance.TasksCompleted() == 3)
         {
-            GameData.Instance.SetLocationPassed(_location.Number);
+            GameData.Instance.SetLocationSuccess(_location.Number);
             await ShowEndLocationWindow(TextKeys.HeaderCongratulations, TextKeys.LocationSuccess);
         }
         else
@@ -282,30 +185,24 @@ public class LocationState : State
         _rerolling = !_rerolling;
 
         if (_rerolling)
-            _diceButtons.EnableDiceButtons();
+            _diceButtons.EnableButtons();
         else
-            _diceButtons.DisableDiceButtons();
+            _diceButtons.DisableButtons();
     }
 
     public void SetLocation(LocationScriptable location)
     {
         _location = location;
-    }
-
-    public void LoadNewspaperData()
-    {
-        _newspaper.LoadData(_location.name, _location.Sprite, _location.InvestigatorPortrait[GameData.Instance.PlayerTurn]);        
-    }
+    }    
 
     private bool IsLocationFailed()
     {
-        return GameData.Instance.DicesAvailable < _location.DiceTasks[_selectedTaskIndex].Task.Length;
+        return GameData.Instance.DicesAvailable < _location.DiceTasks[_locationTasks.SelectedTaskIndex].Task.Length;
     }
 
     private async Task ShowEndLocationWindow(string header, string text)
     {
-        _investigateButton.enabled = false;
-        _rerollButton.enabled = false;
+        EnableInvestigateRerollButtons(false);
 
         await Task.Delay(1000);
 

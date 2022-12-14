@@ -6,7 +6,7 @@ public class GameData
     public int PlayerTurn { get; private set; } = 1;
     public int DicesAvailable { get; private set; } = 6;
     public int DonkeyDices = 0;
-    public bool[] TaskPassed { get; private set; } = {false, false, false};
+    public bool[] TasksStatus { get; private set; } = {false, false, false};
     public bool[] LocationsStatus { get; private set; } = { false, false, false };    
 
     public static GameData Instance
@@ -23,8 +23,8 @@ public class GameData
         DaysLeft = 10;
         PlayerTurn = 1;
         ResetDices();
-        ResetTaskPassed();
-        ResetLocationsPassed();
+        ResetTasks();
+        ResetLocations();
     }
 
     public int DayGone()
@@ -55,20 +55,36 @@ public class GameData
         DicesAvailable = 6;
     }
 
-    public void ResetTaskPassed()
+    public void ResetTasks()
     {
-        for (int i = 0; i < TaskPassed.Length; i++)
+        for (int i = 0; i < TasksStatus.Length; i++)
         {
-            TaskPassed[i] = false;
+            TasksStatus[i] = false;
         }
     }
 
-    public void SetTaskPassed(int index)
+    public void SetTaskSuccess(int index)
     {
-        TaskPassed[index] = true;
+        TasksStatus[index] = true;
     }
 
-    public void ResetLocationsPassed()
+    public bool IsTaskCompleted(int index)
+    {
+        return TasksStatus[index];
+    }
+
+    public int TasksCompleted()
+    {
+        int completed = 0;
+        for (int i = 0; i < TasksStatus.Length; i++)
+        {
+            if (TasksStatus[i])
+                completed++;
+        }
+        return completed;
+    }
+
+    public void ResetLocations()
     {
         for (int i = 0; i < LocationsStatus.Length; i++)
         {
@@ -76,7 +92,7 @@ public class GameData
         }
     }
 
-    public void SetLocationPassed(int index)
+    public void SetLocationSuccess(int index)
     {
         LocationsStatus[index] = true;
     }
@@ -88,13 +104,13 @@ public class GameData
 
     public int LocationsCompleted()
     {
-        int passed = 0;
+        int completed = 0;
         for (int i = 0; i < LocationsStatus.Length; i++)
         {
             if (LocationsStatus[i])
-                passed++;
+                completed++;
         }
-        return passed;
+        return completed;
     }
 
     public void ChangeTurn()

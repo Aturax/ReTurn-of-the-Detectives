@@ -6,11 +6,9 @@ public abstract class State : MonoBehaviour
 
     public void SetStateMachine(GameManager stateMachine)
     {
-        _stateMachine = stateMachine;
-        PreLoadState();
+        _stateMachine = stateMachine;     
     }
-
-    public virtual void PreLoadState() { }
+    
     public virtual void Enter() { }
     public virtual void Exit() { }
 }

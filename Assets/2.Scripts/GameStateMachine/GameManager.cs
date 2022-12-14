@@ -11,11 +11,16 @@ public class GameManager : StateMachine
     [SerializeField] private Fader _fader = null;
     [SerializeField] private AudioSource _audioSource = null;
 
+    protected override State GetInitialState()
+    {
+        return MainMenuState;
+    }
+
     private void Start()
     {
         LoadStateMachine();
         StartStateMachine();
-    }
+    }    
 
     public void LoadStateMachine()
     {
@@ -40,10 +45,5 @@ public class GameManager : StateMachine
     public async Task Fade(float alpha, float time, AudioClip clip)
     {
         await _fader.Fade(alpha, time, clip);
-    }
-
-    protected override State GetInitialState()
-    {
-        return MainMenuState;
     }
 }
