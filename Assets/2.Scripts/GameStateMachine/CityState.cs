@@ -94,7 +94,7 @@ public class CityState : State
             ShowGameOverWindow(TextKeys.HeaderFailure, TextKeys.CaseFailed, false);
         }
 
-        if (GameData.Instance.LocationsCompleted() == 3)
+        if (GameData.Instance.NumberOfLocationsCompleted() == 3)
         {
             ShowGameOverWindow(TextKeys.HeaderCongratulations, TextKeys.CaseResolved, true);
         }

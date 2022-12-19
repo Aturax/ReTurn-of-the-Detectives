@@ -63,7 +63,7 @@ public class GameData
         }
     }
 
-    public void SetTaskSuccess(int index)
+    public void SetTaskSucceed(int index)
     {
         TasksStatus[index] = true;
     }
@@ -73,7 +73,7 @@ public class GameData
         return TasksStatus[index];
     }
 
-    public int TasksCompleted()
+    public int NumberOfTasksCompleted()
     {
         int completed = 0;
         for (int i = 0; i < TasksStatus.Length; i++)
@@ -92,7 +92,7 @@ public class GameData
         }
     }
 
-    public void SetLocationSuccess(int index)
+    public void SetLocationSucceed(int index)
     {
         LocationsStatus[index] = true;
     }
@@ -102,7 +102,7 @@ public class GameData
         return LocationsStatus[index];
     }
 
-    public int LocationsCompleted()
+    public int NumberOfLocationsCompleted()
     {
         int completed = 0;
         for (int i = 0; i < LocationsStatus.Length; i++)
@@ -120,5 +120,4 @@ public class GameData
         else 
             PlayerTurn = 1;
     }
-
 }

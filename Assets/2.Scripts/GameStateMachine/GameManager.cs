@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class GameManager : StateMachine
 {
-    public MainMenuState MainMenuState = null;
-    public CityState CityState = null;
-    public LocationState LocationState = null;
-    public GameOverState GameOverState = null;
+    [field:SerializeField] public MainMenuState MainMenuState { get; private set; } = null;
+    [field: SerializeField] public CityState CityState { get; private set; } = null;
+    [field: SerializeField] public LocationState LocationState { get; private set; } = null;
+    [field: SerializeField] public GameOverState GameOverState { get; private set; } = null;
     
     [SerializeField] private Fader _fader = null;
     [SerializeField] private AudioSource _audioSource = null;

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 
 [Serializable]
 public class TasksImages
@@ -111,7 +110,7 @@ public class LocationState : State
             GameData.Instance.RecoverDice();
         }
 
-        List<Dice> roll = DiceRoll.GetDiceRoll(GameData.Instance.DicesAvailable);
+        List<Dice> roll = Roll.GetRoll(GameData.Instance.DicesAvailable);
         _diceButtons.FillWithRoll(roll);
 
         await _diceButtons.FadeButtons(1.0f);
@@ -120,7 +119,7 @@ public class LocationState : State
 
     private void CompareTaskWithRoll(Dice[] task, List<Dice> roll)
     {
-        bool status = DiceRoll.CheckDiceTask(task, roll);
+        bool status = Roll.IsTaskSuccess(task, roll);
 
         if (status)
             TaskSuccess();
@@ -135,15 +134,15 @@ public class LocationState : State
     private void TaskSuccess()
     {
         _locationTasks.ActiveCompleteTaskSeal();
-        GameData.Instance.SetTaskSuccess(_locationTasks.SelectedTaskIndex);
+        GameData.Instance.SetTaskSucceed(_locationTasks.SelectedTaskIndex);
         GameData.Instance.RecoverDices();
         GameData.Instance.TasksStatus[_locationTasks.SelectedTaskIndex] = true;
-        _locationTasks.TaskSelected = false;
+        _locationTasks.DeselectTask();
         _diceButtons.DisableButtons();
 
         if (GameData.Instance.PlayerTurn == 1)
         {
-            _locationTasks.SelectedTaskIndex++;
+            _locationTasks.IncreaseTaskIndex();
             ShowRerollButton(false);
         }
     }
@@ -151,16 +150,16 @@ public class LocationState : State
     private void TaskFailed()
     {
         GameData.Instance.LoseDice();
-
+        _diceButtons.DisableButtons();
         if (GameData.Instance.PlayerTurn == 1)
             ShowRerollButton(true);
     }
 
     private async void CheckLocalizationCompleted()
     {
-        if (GameData.Instance.TasksCompleted() == 3)
+        if (GameData.Instance.NumberOfTasksCompleted() == 3)
         {
-            GameData.Instance.SetLocationSuccess(_location.Number);
+            GameData.Instance.SetLocationSucceed(_location.Number);
             await ShowEndLocationWindow(TextKeys.HeaderCongratulations, TextKeys.LocationSuccess);
         }
         else

@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pajarita
+      name: BowTie
       rect:
         serializedVersion: 2
         x: 0
@@ -137,7 +137,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monoculo
+      name: Monocle
       rect:
         serializedVersion: 2
         x: 16
@@ -200,7 +200,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Asno
+      name: Donkey
       rect:
         serializedVersion: 2
         x: 64
@@ -224,10 +224,10 @@ TextureImporter:
       name: Newspaper
       rect:
         serializedVersion: 2
-        x: 81
+        x: 80
         y: 0
-        width: 15
-        height: 14
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,7 +242,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Trebol
+      name: Clover
       rect:
         serializedVersion: 2
         x: 96
@@ -274,12 +274,12 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Periodico: 1834069306
-      Asno: -799919753
       Newspaper: 859931341
+      Monocle: -1403209318
       Lupa: 343614435
-      Monoculo: -1403209318
-      Trebol: 52504487
-      Pajarita: -2121869610
+      Donkey: -799919753
+      BowTie: -2121869610
+      Clover: 52504487
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -12,29 +12,29 @@ public enum Dice
     Clover = 4
 }
 
-public static class DiceRoll
+public static class Roll
 {
-    public static List<Dice> GetDiceRoll(int diceNumber)
+    public static List<Dice> GetRoll(int diceNumber)
     {
-        List<Dice> diceRoll = new();        
+        List<Dice> roll = new();
+        var dices = Enum.GetValues(typeof(Dice));
 
         for (int i = 0; i < diceNumber; i++)
         {            
-            var dices = Enum.GetValues(typeof(Dice));
             int index = Random.Range(0, dices.Length);
             Dice dice = (Dice)dices.GetValue(index);
-            diceRoll.Add(dice);
+            roll.Add(dice);
         }
 
-        return diceRoll;
+        return roll;
     }
 
-    public static bool CheckDiceTask(Dice[] task, List<Dice> diceRoll)
+    public static bool IsTaskSuccess(Dice[] task, List<Dice> roll)
     {
         foreach (Dice dice in task)
         {
-            if (diceRoll.Contains(dice))
-                diceRoll.Remove(dice);                
+            if (roll.Contains(dice))
+                roll.Remove(dice);                
             else return false;
         }
         return true;

@@ -10,10 +10,10 @@ public class DiceTask
 [CreateAssetMenu(fileName = "newLocation", menuName = "Location")]
 public class LocationScriptable : ScriptableObject
 {
-    public Sprite[] InvestigatorPortrait = null;
-    public string Name = string.Empty;
-    public int Number = 0;
-    public DiceTask[] DiceTasks = null;
-    public Sprite Sprite = null;
-    public AudioClip Clip = null;
+    [field: SerializeField] public Sprite[] InvestigatorPortrait { get; private set; } = null;
+    [field: SerializeField] public string Name { get; private set; } = string.Empty;
+    [field: SerializeField] public int Number { get; private set; } = 0;
+    [field: SerializeField] public DiceTask[] DiceTasks { get; private set; } = null;
+    [field: SerializeField] public Sprite Sprite { get; private set; } = null;
+    [field: SerializeField] public AudioClip Clip { get; private set; } = null;
 }

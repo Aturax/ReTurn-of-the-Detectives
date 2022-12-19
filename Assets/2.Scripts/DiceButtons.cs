@@ -144,5 +144,4 @@ public class DiceButtons : MonoBehaviour
     {
         _diceButtons[diceIndex].image.CrossFadeAlpha(alpha, time, false);
     }
-
 }

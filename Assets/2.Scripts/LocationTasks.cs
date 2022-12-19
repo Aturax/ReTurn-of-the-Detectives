@@ -8,8 +8,8 @@ public class LocationTasks : MonoBehaviour
     [SerializeField] private GameObject[] _completedTasksSeal = null;
     [SerializeField] private Button[] _taskIndicatorButtons = null;
 
-    public int SelectedTaskIndex { get; set; } = 0;
-    public bool TaskSelected { get; set; } = false;
+    public int SelectedTaskIndex { get; private set; } = 0;
+    public bool TaskSelected { get; private set; } = false;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class LocationTasks : MonoBehaviour
     public void LoadTasks(LocationScriptable location)
     {
         SelectedTaskIndex = 0;
-        TaskSelected = false;
+        DeselectTask();
 
         GameData.Instance.ResetTasks();
 
@@ -53,6 +53,16 @@ public class LocationTasks : MonoBehaviour
             _taskIndicatorButtons[i].gameObject.SetActive(GameData.Instance.PlayerTurn == 0);
             _taskIndicatorButtons[i].enabled = GameData.Instance.PlayerTurn == 0;
         }
+    }
+
+    public void DeselectTask()
+    {
+        TaskSelected = false;
+    }
+
+    public void IncreaseTaskIndex()
+    {
+        SelectedTaskIndex++;
     }
 
     public void ActiveCompleteTaskSeal()
@@ -83,7 +93,7 @@ public class LocationTasks : MonoBehaviour
 
     public void SelectLastTask()
     {
-        if (GameData.Instance.TasksCompleted() == 2)
+        if (GameData.Instance.NumberOfTasksCompleted() == 2)
         {
             for (int i = 0; i < GameData.Instance.TasksStatus.Length; i++)
             {
