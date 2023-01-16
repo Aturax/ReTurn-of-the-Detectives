@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Atlas 1024xv3_0
+      name: DonkeyBig
       rect:
         serializedVersion: 2
         x: 128
@@ -137,7 +137,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_1
+      name: Calendar
       rect:
         serializedVersion: 2
         x: 413
@@ -158,7 +158,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_2
+      name: Map
       rect:
         serializedVersion: 2
         x: 478
@@ -179,7 +179,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_3
+      name: Papire
       rect:
         serializedVersion: 2
         x: 392
@@ -200,7 +200,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_4
+      name: Male
       rect:
         serializedVersion: 2
         x: 407
@@ -221,7 +221,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_5
+      name: Female
       rect:
         serializedVersion: 2
         x: 405
@@ -242,7 +242,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_6
+      name: ParkMap
       rect:
         serializedVersion: 2
         x: 474
@@ -263,7 +263,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_9
+      name: CatedralMap
       rect:
         serializedVersion: 2
         x: 512
@@ -284,7 +284,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_10
+      name: Happy
       rect:
         serializedVersion: 2
         x: 320
@@ -305,7 +305,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_11
+      name: Tears
       rect:
         serializedVersion: 2
         x: 360
@@ -326,7 +326,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_12
+      name: TabernMap
       rect:
         serializedVersion: 2
         x: 480
@@ -347,7 +347,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_13
+      name: AlleyMap
       rect:
         serializedVersion: 2
         x: 507
@@ -368,13 +368,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_15
+      name: Bowtie
       rect:
         serializedVersion: 2
-        x: 547
-        y: 808
-        width: 14
-        height: 9
+        x: 546
+        y: 805
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,13 +389,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_16
+      name: Monocle
       rect:
         serializedVersion: 2
-        x: 563
+        x: 562
         y: 805
-        width: 14
-        height: 15
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -410,13 +410,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_17
+      name: LensIcon
       rect:
         serializedVersion: 2
-        x: 580
+        x: 578
         y: 805
-        width: 13
-        height: 14
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,13 +431,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_18
+      name: NewspaperArrugao
       rect:
         serializedVersion: 2
-        x: 596
-        y: 806
-        width: 13
-        height: 13
+        x: 594
+        y: 805
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,13 +452,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_19
+      name: Donkey
       rect:
         serializedVersion: 2
-        x: 611
+        x: 610
         y: 805
-        width: 14
-        height: 14
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,13 +473,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_20
+      name: Newspaper
       rect:
         serializedVersion: 2
-        x: 627
-        y: 806
-        width: 15
-        height: 13
+        x: 626
+        y: 805
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -494,13 +494,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_21
+      name: Clover
       rect:
         serializedVersion: 2
-        x: 643
-        y: 806
-        width: 14
-        height: 14
+        x: 642
+        y: 805
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -515,7 +515,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_22
+      name: Coffee
       rect:
         serializedVersion: 2
         x: 226
@@ -536,7 +536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_23
+      name: SadEye
       rect:
         serializedVersion: 2
         x: 320
@@ -557,7 +557,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_24
+      name: NewspaperImage
       rect:
         serializedVersion: 2
         x: 387
@@ -578,7 +578,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_25
+      name: Lens
       rect:
         serializedVersion: 2
         x: 275
@@ -599,7 +599,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_26
+      name: Title
       rect:
         serializedVersion: 2
         x: 1
@@ -620,7 +620,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_27
+      name: ParkImage
       rect:
         serializedVersion: 2
         x: 387
@@ -641,7 +641,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_28
+      name: TabernImage
       rect:
         serializedVersion: 2
         x: 387
@@ -662,7 +662,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_29
+      name: Background
       rect:
         serializedVersion: 2
         x: 1
@@ -683,13 +683,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas 1024xv3_30
+      name: CatedralImage
       rect:
         serializedVersion: 2
         x: 387
-        y: 261
+        y: 343
         width: 204
-        height: 162
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -699,6 +699,27 @@ TextureImporter:
       bones: []
       spriteID: 51381d2723da10b4a82fee76b052ca90
       internalID: -365521310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AlleyImage
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 262
+        width: 204
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fdd162725aae8b419eaf08f4f6ca8f7
+      internalID: 16747459
       vertices: []
       indices: 
       edges: []
@@ -714,37 +735,38 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Atlas 1024xv3_16: 724790758
-      Atlas 1024xv3_4: 105190182
-      Atlas 1024xv3_15: -2120372029
-      Atlas 1024xv3_25: -164413112
-      Atlas 1024xv3_22: 2037193995
-      Atlas 1024xv3_2: -1483523166
-      Atlas 1024xv3_13: 409537197
+      Bowtie: -2120372029
+      Clover: 1106026000
+      Coffee: 2037193995
+      NewspaperImage: 1758639844
+      Newspaper: 229587155
+      TabernMap: -137469863
       Atlas 1024xv3_8: -1410576269
-      Atlas 1024xv3_9: 1704749586
-      Atlas 1024xv3_18: -1446053343
-      Atlas 1024xv3_27: 825722092
-      Atlas 1024xv3_29: 914582075
-      Atlas 1024xv3_20: 229587155
-      Atlas 1024xv3_3: 871485078
-      Atlas 1024xv3_5: -1441044467
-      Atlas 1024xv3_28: -1226671919
-      Atlas 1024xv3_30: -365521310
-      Atlas 1024xv3_1: -505452355
+      Male: 105190182
+      ParkImage: 825722092
+      LensIcon: -313699955
+      Female: -1441044467
+      Tears: -199269021
+      SadEye: 826335230
+      Monocle: 724790758
+      Map: -1483523166
+      ParkMap: -547952162
+      CatedralImage: -365521310
       Atlas 1024xv3_7: -1819239220
-      Atlas 1024xv3_26: 1209964276
-      Atlas 1024xv3_10: 669930254
-      Atlas 1024xv3_12: -137469863
-      Atlas 1024xv3_11: -199269021
-      Atlas 1024xv3_21: 1106026000
-      Atlas 1024xv3_24: 1758639844
-      Atlas 1024xv3_6: -547952162
+      Donkey: -1409681122
+      NewspaperArrugao: -1446053343
+      AlleyMap: 409537197
+      Papire: 871485078
+      Calendar: -505452355
+      Background: 914582075
+      Lens: -164413112
+      TabernImage: -1226671919
+      Title: 1209964276
+      DonkeyBig: -686391213
       Atlas 1024xv3_14: 1663921793
-      Atlas 1024xv3_19: -1409681122
-      Atlas 1024xv3_23: 826335230
-      Atlas 1024xv3_17: -313699955
-      Atlas 1024xv3_0: -686391213
+      AlleyImage: 16747459
+      Happy: 669930254
+      CatedralMap: 1704749586
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

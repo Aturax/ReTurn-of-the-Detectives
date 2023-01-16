@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Callejon
   m_EditorClassIdentifier: 
   <InvestigatorPortrait>k__BackingField:
-  - {fileID: 1030307484, guid: 5c46a54922b822f428a4ccde187d4bc7, type: 3}
-  - {fileID: -1701741275, guid: 5c46a54922b822f428a4ccde187d4bc7, type: 3}
+  - {fileID: 105190182, guid: 0d2a910f40784f744b59adddaa3ed223, type: 3}
+  - {fileID: -1441044467, guid: 0d2a910f40784f744b59adddaa3ed223, type: 3}
   <Name>k__BackingField: Callejon
   <Number>k__BackingField: 0
   <DiceTasks>k__BackingField:
   - Task: 0300000002000000
   - Task: 010000000100000001000000
   - Task: 0100000004000000
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 79e23536e9aaf4140982c184560902e1, type: 3}
+  <Sprite>k__BackingField: {fileID: 16747459, guid: 0d2a910f40784f744b59adddaa3ed223, type: 3}
   <Clip>k__BackingField: {fileID: 8300000, guid: 3766dd4a5e3b7bf409e15ba28b4b3a2d, type: 3}
