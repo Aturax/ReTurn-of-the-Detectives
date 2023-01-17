@@ -13620,6 +13620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _locationText: {fileID: 157422552}
   _locationImage: {fileID: 464475871}
+  _locationDescription: {fileID: 1491621932}
   _investigatorPortrait: {fileID: 1478387906}
 --- !u!1 &1816197008
 GameObject:
