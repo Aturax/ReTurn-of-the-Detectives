@@ -16,4 +16,5 @@ public class LocationScriptable : ScriptableObject
     [field: SerializeField] public DiceTask[] DiceTasks { get; private set; } = null;
     [field: SerializeField] public Sprite Sprite { get; private set; } = null;
     [field: SerializeField] public AudioClip Clip { get; private set; } = null;
+    [field: SerializeField, TextArea] public string Description { get; private set; } = null;
 }
