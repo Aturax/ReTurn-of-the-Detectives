@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DonkeyBig
+      name: GameOver
       rect:
         serializedVersion: 2
-        x: 128
-        y: 816
-        width: 254
-        height: 207
+        x: 1
+        y: 807
+        width: 384
+        height: 216
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,7 +161,7 @@ TextureImporter:
       name: Map
       rect:
         serializedVersion: 2
-        x: 478
+        x: 476
         y: 855
         width: 300
         height: 168
@@ -245,8 +245,8 @@ TextureImporter:
       name: ParkMap
       rect:
         serializedVersion: 2
-        x: 474
-        y: 824
+        x: 609
+        y: 825
         width: 20
         height: 23
       alignment: 0
@@ -266,8 +266,8 @@ TextureImporter:
       name: CatedralMap
       rect:
         serializedVersion: 2
-        x: 512
-        y: 831
+        x: 647
+        y: 832
         width: 17
         height: 16
       alignment: 0
@@ -284,53 +284,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Happy
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 800
-        width: 32
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9e93239ada3ef5c40b4b4d1a604cd832
-      internalID: 669930254
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tears
-      rect:
-        serializedVersion: 2
-        x: 360
-        y: 730
-        width: 19
-        height: 85
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 908e0f41fd30dbe4d830b2c000e123c8
-      internalID: -199269021
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: TabernMap
       rect:
         serializedVersion: 2
-        x: 480
-        y: 802
+        x: 615
+        y: 803
         width: 17
         height: 13
       alignment: 0
@@ -350,8 +308,8 @@ TextureImporter:
       name: AlleyMap
       rect:
         serializedVersion: 2
-        x: 507
-        y: 805
+        x: 642
+        y: 806
         width: 21
         height: 16
       alignment: 0
@@ -371,7 +329,7 @@ TextureImporter:
       name: Bowtie
       rect:
         serializedVersion: 2
-        x: 546
+        x: 495
         y: 805
         width: 16
         height: 16
@@ -392,7 +350,7 @@ TextureImporter:
       name: Monocle
       rect:
         serializedVersion: 2
-        x: 562
+        x: 511
         y: 805
         width: 16
         height: 16
@@ -413,7 +371,7 @@ TextureImporter:
       name: LensIcon
       rect:
         serializedVersion: 2
-        x: 578
+        x: 527
         y: 805
         width: 16
         height: 16
@@ -434,7 +392,7 @@ TextureImporter:
       name: NewspaperArrugao
       rect:
         serializedVersion: 2
-        x: 594
+        x: 543
         y: 805
         width: 16
         height: 16
@@ -455,7 +413,7 @@ TextureImporter:
       name: Donkey
       rect:
         serializedVersion: 2
-        x: 610
+        x: 559
         y: 805
         width: 16
         height: 16
@@ -476,7 +434,7 @@ TextureImporter:
       name: Newspaper
       rect:
         serializedVersion: 2
-        x: 626
+        x: 575
         y: 805
         width: 16
         height: 16
@@ -497,7 +455,7 @@ TextureImporter:
       name: Clover
       rect:
         serializedVersion: 2
-        x: 642
+        x: 591
         y: 805
         width: 16
         height: 16
@@ -518,8 +476,8 @@ TextureImporter:
       name: Coffee
       rect:
         serializedVersion: 2
-        x: 226
-        y: 729
+        x: 702
+        y: 493
         width: 75
         height: 71
       alignment: 0
@@ -536,31 +494,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SadEye
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 784
-        width: 32
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d6e504f294b142049a47eed4baf5c335
-      internalID: 826335230
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: NewspaperImage
       rect:
         serializedVersion: 2
-        x: 387
+        x: 390
         y: 589
         width: 376
         height: 211
@@ -581,8 +518,8 @@ TextureImporter:
       name: Lens
       rect:
         serializedVersion: 2
-        x: 275
-        y: 603
+        x: 605
+        y: 368
         width: 94
         height: 117
       alignment: 0
@@ -602,8 +539,8 @@ TextureImporter:
       name: Title
       rect:
         serializedVersion: 2
-        x: 1
-        y: 374
+        x: 2
+        y: 373
         width: 384
         height: 216
       alignment: 0
@@ -623,8 +560,8 @@ TextureImporter:
       name: ParkImage
       rect:
         serializedVersion: 2
-        x: 387
-        y: 507
+        x: 390
+        y: 503
         width: 204
         height: 80
       alignment: 0
@@ -644,8 +581,8 @@ TextureImporter:
       name: TabernImage
       rect:
         serializedVersion: 2
-        x: 387
-        y: 425
+        x: 390
+        y: 421
         width: 204
         height: 80
       alignment: 0
@@ -665,8 +602,8 @@ TextureImporter:
       name: Background
       rect:
         serializedVersion: 2
-        x: 1
-        y: 154
+        x: 2
+        y: 153
         width: 384
         height: 216
       alignment: 0
@@ -686,8 +623,8 @@ TextureImporter:
       name: CatedralImage
       rect:
         serializedVersion: 2
-        x: 387
-        y: 343
+        x: 390
+        y: 339
         width: 204
         height: 80
       alignment: 0
@@ -707,8 +644,8 @@ TextureImporter:
       name: AlleyImage
       rect:
         serializedVersion: 2
-        x: 387
-        y: 262
+        x: 390
+        y: 256
         width: 204
         height: 80
       alignment: 0
@@ -720,6 +657,90 @@ TextureImporter:
       bones: []
       spriteID: 8fdd162725aae8b419eaf08f4f6ca8f7
       internalID: 16747459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Win
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 590
+        width: 384
+        height: 216
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1845cdee5406db146957d106fe8570a7
+      internalID: -636076343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seal
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 495
+        width: 86
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c121412b5d434a4e8bf06ebb1469dbd
+      internalID: 1024532643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 830
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baba1a7372b517b4aa4a99acffcc48aa
+      internalID: 234404645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panel
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 809
+        width: 124
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f91cef6fffbbdca4fa0872c0aa4b230a
+      internalID: 162713245
       vertices: []
       indices: 
       edges: []
@@ -746,23 +767,27 @@ TextureImporter:
       ParkImage: 825722092
       LensIcon: -313699955
       Female: -1441044467
+      Seal: 1024532643
+      Arrow: 234404645
       Tears: -199269021
       SadEye: 826335230
       Monocle: 724790758
       Map: -1483523166
       ParkMap: -547952162
+      GameOver: -686391213
       CatedralImage: -365521310
       Atlas 1024xv3_7: -1819239220
       Donkey: -1409681122
       NewspaperArrugao: -1446053343
+      Win: -636076343
       AlleyMap: 409537197
       Papire: 871485078
+      Panel: 162713245
       Calendar: -505452355
       Background: 914582075
       Lens: -164413112
       TabernImage: -1226671919
       Title: 1209964276
-      DonkeyBig: -686391213
       Atlas 1024xv3_14: 1663921793
       AlleyImage: 16747459
       Happy: 669930254
