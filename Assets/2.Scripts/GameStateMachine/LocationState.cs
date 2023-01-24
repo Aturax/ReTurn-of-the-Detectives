@@ -44,7 +44,7 @@ public class LocationState : State
         _stateMachine.PlaySound(_location.Clip);
         gameObject.SetActive(true);
 
-        _newspaper.LoadData(_location.name, _location.Sprite, _location.InvestigatorPortrait[GameData.Instance.PlayerTurn]);
+        _newspaper.LoadData(_location, _location.InvestigatorPortrait[GameData.Instance.PlayerTurn]);
         _locationTasks.LoadTasks(_location);
         _locationTasks.ResetIndicators();
         ResetButtons();

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Dice
   m_EditorClassIdentifier: 
   _faces:
-  - {fileID: -799919753, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
-  - {fileID: -1403209318, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
-  - {fileID: 859931341, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
-  - {fileID: -2121869610, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
-  - {fileID: 52504487, guid: 0f3f18758b5cb194f90ec5fe4e39d71b, type: 3}
+  - {fileID: -1409681122, guid: 0d2a910f40784f744b59adddaa3ed223, type: 3}
+  - {fileID: 724790758, guid: 0d2a910f40784f744b59adddaa3ed223, type: 3}
+  - {fileID: 229587155, guid: 0d2a910f40784f744b59adddaa3ed223, type: 3}
+  - {fileID: -2120372029, guid: 0d2a910f40784f744b59adddaa3ed223, type: 3}
+  - {fileID: 1106026000, guid: 0d2a910f40784f744b59adddaa3ed223, type: 3}
