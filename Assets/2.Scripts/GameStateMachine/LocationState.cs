@@ -21,6 +21,7 @@ public class LocationState : State
     [SerializeField] private DiceButtons _diceButtons = null;
     [SerializeField] private Button _investigateButton = null;
     [SerializeField] private Button _rerollButton = null;
+    [SerializeField] private GameObject _rerollPanel = null;
 
     [Header("Location Window")]
     [SerializeField] private DialogPanelWindow _locationEndedWindow = null;
@@ -92,6 +93,9 @@ public class LocationState : State
 
     private async void Investigate()
     {
+        _rerollPanel.SetActive(false);
+        _locationTasks.ShowTaskResult(false);
+
         if (_diceButtons.GetNumberOfDicesToRoll() == 0 || !_locationTasks.TaskSelected)
             return;
 
@@ -114,20 +118,24 @@ public class LocationState : State
         _diceButtons.FillWithRoll(roll);
 
         await _diceButtons.FadeButtons(1.0f);
-        CompareTaskWithRoll(_location.DiceTasks[_locationTasks.SelectedTaskIndex].Task, roll);
+        await CompareTaskWithRoll(_location.DiceTasks[_locationTasks.SelectedTaskIndex].Task, roll);
     }
 
-    private void CompareTaskWithRoll(Dice[] task, List<Dice> roll)
+    private async Task CompareTaskWithRoll(Dice[] task, List<Dice> roll)
     {
-        bool status = Roll.IsTaskSuccess(task, roll);
+        await _diceButtons.LightDiceResults(task, roll);
+        bool status = Roll.IsTaskSuccess(task, roll);        
+        await Task.Delay(1000);
 
         if (status)
             TaskSuccess();
         else
+        {
+            _locationTasks.ShowTaskResult(true);
             TaskFailed();
+        }
 
         EnableInvestigateRerollButtons(true);
-
         CheckLocalizationCompleted();
     }
 
@@ -182,8 +190,9 @@ public class LocationState : State
     private void ActiveReroll()
     {
         _rerolling = !_rerolling;
+        _rerollPanel.SetActive(_rerolling);
 
-        if (_rerolling)
+        if (_rerolling)        
             _diceButtons.EnableButtons();
         else
             _diceButtons.DisableButtons();

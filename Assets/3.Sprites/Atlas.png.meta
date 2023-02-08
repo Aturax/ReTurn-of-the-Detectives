@@ -686,10 +686,10 @@ TextureImporter:
       name: Seal
       rect:
         serializedVersion: 2
-        x: 601
+        x: 599
         y: 495
-        width: 86
-        height: 89
+        width: 90
+        height: 90
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -733,7 +733,7 @@ TextureImporter:
         width: 124
         height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -741,6 +741,48 @@ TextureImporter:
       bones: []
       spriteID: f91cef6fffbbdca4fa0872c0aa4b230a
       internalID: 162713245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Check
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 903
+        width: 98
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 545266b4a52cd924c8e8ac36bee1c9b6
+      internalID: 784650780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cross
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 912
+        width: 83
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4e982af58cf8cd4ab27c7e8f8510c3e
+      internalID: 293371910
       vertices: []
       indices: 
       edges: []
@@ -780,7 +822,9 @@ TextureImporter:
       Donkey: -1409681122
       NewspaperArrugao: -1446053343
       Win: -636076343
+      Check: 784650780
       AlleyMap: 409537197
+      Cross: 293371910
       Papire: 871485078
       Panel: 162713245
       Calendar: -505452355

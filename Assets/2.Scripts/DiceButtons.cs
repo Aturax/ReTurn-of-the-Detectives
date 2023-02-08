@@ -8,6 +8,7 @@ public class DiceButtons : MonoBehaviour
 {
     [SerializeField] private DiceScriptable _dice = null;
     [SerializeField] private Button[] _diceButtons = null;
+    [SerializeField] private Outline[] _diceOutline = null;
     private bool[] _dicesSelected = null;
 
     private void Awake()
@@ -38,6 +39,7 @@ public class DiceButtons : MonoBehaviour
             _diceButtons[index].image.sprite = _dice.Faces[(int)diceValue];
             _diceButtons[index].gameObject.SetActive(true);
             _dicesSelected[index] = true;
+            _diceOutline[index].enabled = false;
             index++;
         }
         GameData.Instance.RecoverDices();
@@ -46,7 +48,7 @@ public class DiceButtons : MonoBehaviour
 
     public void DisableButtons()
     {
-        foreach(Button button in _diceButtons)
+        foreach (Button button in _diceButtons)
         {
             button.enabled = false;
         }
@@ -56,12 +58,13 @@ public class DiceButtons : MonoBehaviour
             if (_diceButtons[i].image.color.a != 0.0f)
                 _diceButtons[i].enabled = false;
             _dicesSelected[i] = true;
+            _diceOutline[i].enabled = false;
         }
     }
 
     public void EnableButtons()
     {
-        for(int i = 0; i < _diceButtons.Length; i++)
+        for (int i = 0; i < _diceButtons.Length; i++)
         {
             if (_diceButtons[i].image.color.a != 0.0f)
                 _diceButtons[i].enabled = true;
@@ -93,6 +96,7 @@ public class DiceButtons : MonoBehaviour
 
         for (int i = 0; i < _diceButtons.Length; i++)
         {
+            _diceOutline[i].enabled = false;
             if (_dicesSelected[i])
             {
                 FadeDice(i, alpha, 0.3f);
@@ -102,6 +106,32 @@ public class DiceButtons : MonoBehaviour
 
         await Task.Delay(500);
     }
+
+    public async Task LightDiceResults(Dice[] task, List<Dice> roll)
+    {
+        int delay = 150;
+        bool correct = false;
+        for (int diceIndex = 0; diceIndex < roll.Count; diceIndex++)
+        {
+            await Task.Delay(delay);
+            correct = false;
+            for (int i = 0; i < task.Length; i++)
+            {
+                if (roll[diceIndex] == task[i])
+                {
+                    correct = true;
+                    break;
+                }
+            }
+
+            if (!correct)
+            {
+                FadeDice(diceIndex, 0.3f, 0.3f);
+                await Task.Delay(delay*2);
+            }
+        }
+    }
+
     public int GetNumberOfDicesToRoll()
     {
         int dices = 0;
@@ -115,9 +145,15 @@ public class DiceButtons : MonoBehaviour
         return dices;
     }
 
+    public void DisableOutineDice(int diceIndex)
+    {
+        _diceOutline[diceIndex].enabled = false;
+    }
+
     private void SelectDiceToRoll(int diceIndex)
     {
         _dicesSelected[diceIndex] = !_dicesSelected[diceIndex];
+        _diceOutline[diceIndex].enabled = _dicesSelected[diceIndex];
     }
 
     private void SelectDiceToRoll(int diceIndex, bool status)
