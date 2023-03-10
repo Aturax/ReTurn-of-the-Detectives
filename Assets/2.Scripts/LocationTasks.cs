@@ -1,4 +1,3 @@
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +7,7 @@ public class LocationTasks : MonoBehaviour
     [SerializeField] private TasksImages[] _tasksImages = null;
     [SerializeField] private GameObject[] _completedTasksSeal = null;
     [SerializeField] private Button[] _taskIndicatorButtons = null;
+    [SerializeField] private TaskArrow[] _taskArrows = null;
     [SerializeField] private Image _taskResult = null;
 
     public int SelectedTaskIndex { get; private set; } = 0;
@@ -78,6 +78,8 @@ public class LocationTasks : MonoBehaviour
         for (int i = 0; i < _taskIndicatorButtons.Length; i++)
         {
             _taskIndicatorButtons[i].gameObject.SetActive(!GameData.Instance.IsTaskCompleted(i));
+            if (_taskIndicatorButtons[i].gameObject.activeInHierarchy)
+                _taskArrows[i].StartBlink();
         }
     }
 
@@ -89,6 +91,7 @@ public class LocationTasks : MonoBehaviour
         for (int i = 0; i < _taskIndicatorButtons.Length; i++)
         {
             _taskIndicatorButtons[i].gameObject.SetActive(i == index);
+            _taskArrows[i].SetBaseColor();
         }
         SelectedTaskIndex = index;
         TaskSelected = true;

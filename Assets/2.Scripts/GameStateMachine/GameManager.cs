@@ -20,14 +20,14 @@ public class GameManager : StateMachine
     {
         LoadStateMachine();
         StartStateMachine();
-    }    
+    }
 
     public void LoadStateMachine()
     {
         MainMenuState.SetStateMachine(this);
         CityState.SetStateMachine(this);
         LocationState.SetStateMachine(this);
-        GameOverState.SetStateMachine(this);        
+        GameOverState.SetStateMachine(this);
         _fader.LoadFader();
     }
 

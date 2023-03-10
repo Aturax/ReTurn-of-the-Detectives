@@ -66,7 +66,7 @@ public class LocationState : State
         _rerollButton.gameObject.SetActive(false);
         _diceButtons.ResetDices();
         _rerolling = false;
-        _rerolled = GameData.Instance.PlayerTurn == 0;        
+        _rerolled = GameData.Instance.PlayerTurn == 0;
     }
 
     private void EnableInvestigateRerollButtons(bool status)
